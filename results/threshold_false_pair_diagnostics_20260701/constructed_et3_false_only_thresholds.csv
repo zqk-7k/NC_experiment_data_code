@@ -1,0 +1,6 @@
+dataset,score_name,threshold_source,target_value,threshold,n_true_pairs,n_false_pairs,true_pair_count_above_threshold,false_pair_count_above_threshold,candidate_count_above_threshold,recall,precision,false_pair_exceedance_rate,false_per_true_recovered
+constructed_et3_full_pair_catalog,final_score,target_false_pair_exceedance_rate,0.01,4.230512619018555,3000,40492500,3000,404925,407925,1.0,0.007354293068578783,0.01,134.975
+constructed_et3_full_pair_catalog,final_score,target_false_pair_exceedance_rate,0.001,6.481482028961182,3000,40492500,2998,40493,43491,0.9993333333333333,0.068933802395898,0.0010000123479656728,13.50667111407605
+constructed_et3_full_pair_catalog,final_score,target_false_pair_exceedance_rate,0.0001,9.602198600769043,3000,40492500,2963,4050,7013,0.9876666666666667,0.422501069442464,0.00010001852194850898,1.3668579142760715
+constructed_et3_full_pair_catalog,final_score,target_false_pair_exceedance_rate,1e-05,13.162940979003906,3000,40492500,2619,405,3024,0.873,0.8660714285714286,1.0001852194850899e-05,0.15463917525773196
+constructed_et3_full_pair_catalog,final_score,target_false_pair_exceedance_rate,1e-06,20.79305648803711,3000,40492500,131,41,172,0.043666666666666666,0.7616279069767442,1.0125331851577453e-06,0.31297709923664124

@@ -1,0 +1,13 @@
+{
+  "path": "/root/autodl-tmp/gw-catalog/data/gwtc_injection_pair_diagnostics.csv",
+  "rows": 52530,
+  "true_pairs": 200,
+  "false_pairs": 52330,
+  "pair_class_counts": {
+    "background_pair": 19530,
+    "injection_background_false": 25200,
+    "injection_injection_false": 7600,
+    "true_injected_pair": 200
+  },
+  "records_path": "/root/autodl-tmp/gw-catalog/data/gwtc_injection_pair_diagnostics_recovery_records.csv"
+}

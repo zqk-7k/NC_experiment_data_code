@@ -1,0 +1,22 @@
+[
+  {
+    "figure": "A",
+    "paths": [
+      "/root/autodl-tmp/gw-catalog/figures_pair_diagnostics/figA_gwtc_real_background_injected_overlay.png",
+      "/root/autodl-tmp/gw-catalog/figures_pair_diagnostics/figA_gwtc_real_background_injected_overlay.pdf"
+    ],
+    "background_pairs_plotted": 1953,
+    "true_injected_pairs_plotted": 200,
+    "gw170104_gw170814_marker_found": true
+  },
+  {
+    "figure": "B",
+    "paths": [
+      "/root/autodl-tmp/gw-catalog/figures_pair_diagnostics/figB_et3_channel_separability_corner.png",
+      "/root/autodl-tmp/gw-catalog/figures_pair_diagnostics/figB_et3_channel_separability_corner.pdf"
+    ],
+    "false_pairs_plotted": 120000,
+    "true_sis_pairs_plotted": 1500,
+    "true_pm_pairs_plotted": 1500
+  }
+]

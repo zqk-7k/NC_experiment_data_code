@@ -1,0 +1,3 @@
+catalog,n_events,n_pairs,waveform_available_events,waveform_available_pairs,gate1_macro_r_at_10,gate1_min_family_r_at_10,selected_weights,top_pair,top_pair_waveform_available,top_pair_ood,gw170104_gw170814_rank
+GWTC-3,63,1953,55,1485,0.913888888888889,0.9111111111111112,"{""waveform"": 0.25, ""time"": 0.25, ""sky"": 4.0}",GW191219_163120--GW191230_180458,True,False,272
+GWTC-4.1,84,3486,81,3240,0.8583333333333334,0.8444444444444444,"{""waveform"": 1.0, ""time"": 0.25, ""sky"": 4.0}",GW230726_002940--GW230814_230901,True,False,

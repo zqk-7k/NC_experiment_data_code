@@ -1,0 +1,34 @@
+{
+  "snr_cut": 8.0,
+  "et3": {
+    "n_events": 9000,
+    "n_events_snr_lt8": 21,
+    "n_events_snr_ge8": 8979,
+    "n_true_pairs": 3000,
+    "n_true_pairs_min_snr_lt8": 2,
+    "n_true_pairs_min_snr_ge8": 2998,
+    "snr_quantiles": {
+      "0.0": 4.80859210891185,
+      "0.01": 11.161948262544744,
+      "0.05": 18.073204851114237,
+      "0.1": 23.524466541136274,
+      "0.5": 67.3818890034027,
+      "0.9": 223.72673221771285,
+      "0.99": 684.985313925805,
+      "1.0": 5192.460534799287
+    }
+  },
+  "real_catalogs": {
+    "real_gwtc3_null_catalog:all": 1953,
+    "real_gwtc3_null_catalog:low_snr_lt8": 0,
+    "real_gwtc3_null_catalog:high_snr_ge8": 1953,
+    "real_gwtc4p1_null_catalog:all": 3486,
+    "real_gwtc4p1_null_catalog:low_snr_lt8": 0,
+    "real_gwtc4p1_null_catalog:high_snr_ge8": 3486
+  },
+  "notes": [
+    "ET-3 SNR<8 true-pair group is very small; recall estimates are unstable and should be reported as an audit only.",
+    "Real GWTC has no confirmed true lens labels here; SNR-stratified real results are null-catalog candidate composition, not recall or detection significance.",
+    "GWTC injection pair diagnostics currently contain snr_ratio but not absolute injected-event SNR, so absolute SNR<8/>=8 injection stratification is not reported here."
+  ]
+}

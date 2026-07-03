@@ -1,0 +1,36 @@
+{
+  "source_run": "/root/autodl-tmp/gw-catalog/runs/real_gwtc_lensing_search_20260625",
+  "n_events": 63,
+  "n_pairs": 1953,
+  "waveform_available_events": 55,
+  "waveform_available_pairs": 1485,
+  "selected_weights": {
+    "waveform": 0.25,
+    "time": 0.25,
+    "sky": 4.0
+  },
+  "gate1_test_macro_r_at_10": 0.913888888888889,
+  "gate1_test_min_family_r_at_10": 0.9111111111111112,
+  "top_pair": {
+    "rank": 1,
+    "event_i": "GW191219_163120",
+    "event_j": "GW191230_180458",
+    "final_score": 10.267933,
+    "waveform_score": 0.9174363315105438,
+    "time_score": 1.3872181,
+    "healpix_sky_score": -0.467875,
+    "delta_t_days": 11.065023148148148,
+    "healpix_overlap": 0.6263318061828613,
+    "waveform_available": true,
+    "detector_coverage": "H1,L1,V1 | H1, L1, V1",
+    "snr_ratio": 1.142857142857143,
+    "snr_score": -0.5826776,
+    "empirical_catalog_tail_p": 0.0005120327700972
+  },
+  "gw170104_gw170814_rank": {
+    "waveform_time_sky": 272,
+    "time_sky_baseline": 333,
+    "forced_equal_waveform_time_sky": 139
+  },
+  "top20_path": "/root/autodl-tmp/gw-catalog/runs/real_gwtc_lensing_search_20260625/results/candidate_shortlist_waveform_time_sky.csv"
+}

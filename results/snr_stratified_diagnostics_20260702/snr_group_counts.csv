@@ -1,0 +1,9 @@
+row_type,snr_group,count
+et3_event_snr_group,low_snr_lt8,21
+et3_event_snr_group,high_snr_ge8,8979
+et3_true_pair_min_snr_group,low_snr_lt8,2
+et3_true_pair_min_snr_group,high_snr_ge8,2998
+et3_event_snr_group_PM,low_snr_lt8,13
+et3_event_snr_group_PM,high_snr_ge8,4487
+et3_event_snr_group_SIS,low_snr_lt8,8
+et3_event_snr_group_SIS,high_snr_ge8,4492

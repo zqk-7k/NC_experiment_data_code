@@ -1,0 +1,31 @@
+{
+  "densities": [
+    100.0,
+    1000.0,
+    10000.0,
+    100000.0
+  ],
+  "lens_fractions": [
+    0.01,
+    0.001,
+    0.0001
+  ],
+  "budgets": [
+    50,
+    100,
+    200
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "n_true_pairs": 60,
+  "embedding_dim": 64,
+  "embedding_noise_sigma": 0.06,
+  "false_samples": 350000,
+  "catalog_window_years": 10.240413751362588,
+  "waveform_channel": "calibrated surrogate waveform embedding only; not full strain-level waveform",
+  "combined_time_sky_scale": 0.01,
+  "combined_fusion": "z(waveform_embedding) + 0.01 * z(time_delay + sky_localization block)"
+}

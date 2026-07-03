@@ -1,0 +1,106 @@
+loaded 1/84 GW230518_125908 nside=512 group=C00:IMRPhenomNSBH:LowSpin
+loaded 2/84 GW230601_224134 nside=256 group=C00:IMRPhenomXO4a
+loaded 3/84 GW230605_065343 nside=512 group=C00:IMRPhenomXO4a
+loaded 4/84 GW230606_004305 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 5/84 GW230608_205047 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 6/84 GW230609_064958 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 7/84 GW230624_113103 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 8/84 GW230627_015337 nside=1024 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 9/84 GW230628_231200 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 10/84 GW230630_125806 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 11/84 GW230630_234532 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 12/84 GW230702_185453 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 13/84 GW230704_021211 nside=256 group=C00:IMRPhenomXO4a
+loaded 14/84 GW230704_212616 nside=128 group=C00:IMRPhenomXO4a
+loaded 15/84 GW230706_104333 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 16/84 GW230707_124047 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 17/84 GW230708_053705 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 18/84 GW230708_230935 nside=256 group=C00:IMRPhenomXO4a
+loaded 19/84 GW230709_122727 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 20/84 GW230712_090405 nside=256 group=C00:IMRPhenomXO4a
+loaded 21/84 GW230723_101834 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 22/84 GW230726_002940 nside=64 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 23/84 GW230729_082317 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 24/84 GW230731_215307 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 25/84 GW230803_033412 nside=256 group=C00:IMRPhenomXO4a
+loaded 26/84 GW230805_034249 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 27/84 GW230806_204041 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 28/84 GW230811_032116 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 29/84 GW230814_061920 nside=256 group=C00:IMRPhenomXO4a
+loaded 30/84 GW230814_230901 nside=64 group=C00:IMRPhenomXO4a
+loaded 31/84 GW230819_171910 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 32/84 GW230820_212515 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 33/84 GW230824_033047 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 34/84 GW230825_041334 nside=256 group=C00:IMRPhenomXO4a
+loaded 35/84 GW230831_015414 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 36/84 GW230904_051013 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 37/84 GW230911_195324 nside=64 group=C00:IMRPhenomXO4a
+loaded 38/84 GW230914_111401 nside=512 group=C00:IMRPhenomXO4a
+loaded 39/84 GW230919_215712 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 40/84 GW230920_071124 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 41/84 GW230922_020344 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 42/84 GW230922_040658 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 43/84 GW230924_124453 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 44/84 GW230927_043729 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 45/84 GW230927_153832 nside=512 group=C00:IMRPhenomXO4a
+loaded 46/84 GW230928_215827 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 47/84 GW230930_110730 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 48/84 GW231001_140220 nside=256 group=C00:IMRPhenomXO4a
+loaded 49/84 GW231004_232346 nside=256 group=C00:IMRPhenomXO4a
+loaded 50/84 GW231005_021030 nside=128 group=C00:IMRPhenomXO4a
+loaded 51/84 GW231005_091549 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 52/84 GW231008_142521 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 53/84 GW231014_040532 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 54/84 GW231018_233037 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 55/84 GW231020_142947 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 56/84 GW231028_153006 nside=512 group=C00:IMRPhenomXO4a
+loaded 57/84 GW231029_111508 nside=64 group=C00:IMRPhenomXO4a
+loaded 58/84 GW231102_071736 nside=256 group=C00:IMRPhenomXO4a
+loaded 59/84 GW231104_133418 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 60/84 GW231108_125142 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 61/84 GW231110_040320 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 62/84 GW231113_122623 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 63/84 GW231113_200417 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 64/84 GW231114_043211 nside=256 group=C00:IMRPhenomXO4a
+loaded 65/84 GW231118_005626 nside=512 group=C00:IMRPhenomXO4a
+loaded 66/84 GW231118_071402 nside=256 group=C00:IMRPhenomXO4a
+loaded 67/84 GW231118_090602 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 68/84 GW231119_075248 nside=128 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 69/84 GW231127_165300 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 70/84 GW231129_081745 nside=256 group=C00:IMRPhenomXO4a
+loaded 71/84 GW231206_233134 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 72/84 GW231206_233901 nside=512 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 73/84 GW231213_111417 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 74/84 GW231221_135041 nside=256 group=C00:IMRPhenomXO4a
+loaded 75/84 GW231223_032836 nside=256 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 76/84 GW231223_075055 nside=512 group=C00:IMRPhenomXO4a
+loaded 77/84 GW231223_202619 nside=64 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 78/84 GW231224_024321 nside=1024 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 79/84 GW231226_101520 nside=1024 group=C00:IMRPhenomXO4a
+loaded 80/84 GW231230_170116 nside=128 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 81/84 GW231231_154016 nside=64 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 82/84 GW240104_164932 nside=64 group=C00:IMRPhenomXPHM-SpinTaylor
+loaded 83/84 GW240107_013215 nside=256 group=C00:IMRPhenomXO4a
+loaded 84/84 GW240109_050431 nside=64 group=C00:IMRPhenomXPHM-SpinTaylor
+{
+  "generated_at_utc": "2026-06-29T15:17:36.248439+00:00",
+  "n_events": 84,
+  "n_pairs": 3486,
+  "common_nside": 512,
+  "output": "/root/autodl-tmp/gw-catalog/runs/real_gwtc34_lensing_search_20260629_full_o4/features/real_sky_overlap.parquet",
+  "wall_time_s": 36.45602780766785,
+  "cosine_overlap_quantiles": {
+    "0.0": 0.0,
+    "0.5": 0.030669995583593845,
+    "0.9": 0.1897949054837227,
+    "0.99": 0.47714264392852834,
+    "1.0": 0.9713364243507385
+  },
+  "angular_sep_deg_quantiles": {
+    "0.0": 1.3854002030588197,
+    "0.5": 90.70802995605783,
+    "0.9": 145.81838753500574,
+    "0.99": 169.63482225404624,
+    "1.0": 178.99104244393533
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "generated_at_utc": "2026-06-29T17:50:19.105572+00:00",
+  "GW170104--GW170814": {
+    "waveform_time_sky": 272,
+    "time_sky_baseline": 333,
+    "forced_equal_waveform_time_sky": 139
+  },
+  "note": "Ranks are empirical catalog ranks for follow-up context, not p-values or detection significance."
+}

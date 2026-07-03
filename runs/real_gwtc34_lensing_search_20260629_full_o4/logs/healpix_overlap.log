@@ -1,0 +1,22 @@
+{
+  "generated_at_utc": "2026-06-29T15:17:36.248439+00:00",
+  "n_events": 84,
+  "n_pairs": 3486,
+  "common_nside": 512,
+  "output": "/root/autodl-tmp/gw-catalog/runs/real_gwtc34_lensing_search_20260629_full_o4/features/real_sky_overlap.parquet",
+  "wall_time_s": 36.45602780766785,
+  "cosine_overlap_quantiles": {
+    "0.0": 0.0,
+    "0.5": 0.030669995583593845,
+    "0.9": 0.1897949054837227,
+    "0.99": 0.47714264392852834,
+    "1.0": 0.9713364243507385
+  },
+  "angular_sep_deg_quantiles": {
+    "0.0": 1.3854002030588197,
+    "0.5": 90.70802995605783,
+    "0.9": 145.81838753500574,
+    "0.99": 169.63482225404624,
+    "1.0": 178.99104244393533
+  }
+}

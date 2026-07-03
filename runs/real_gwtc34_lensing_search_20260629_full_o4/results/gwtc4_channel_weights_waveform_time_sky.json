@@ -1,0 +1,96 @@
+{
+  "generated_at_utc": "2026-06-29T17:50:19.099909+00:00",
+  "method": "GWTC-4 waveform + time-delay + real HEALPix sky-overlap real-catalog ranking",
+  "snr_policy": "SNR/amplitude is audit-only and is not used in final_score or shortlist rank.",
+  "weight_policy": "validation_selected_waveform_time_sky_constrained_positive_three_channel",
+  "selected_weights_validation": {
+    "waveform": 1.0,
+    "time": 0.25,
+    "sky": 4.0
+  },
+  "time_sky_baseline_weights": {
+    "waveform": 0.0,
+    "time": 0.25,
+    "sky": 4.0
+  },
+  "final_weights": {
+    "waveform": 1.0,
+    "time": 0.25,
+    "sky": 4.0
+  },
+  "validation_selected_metrics": {
+    "waveform": 1.0,
+    "time": 0.25,
+    "sky": 4.0,
+    "macro_r_at_1": 0.6499999999999999,
+    "macro_r_at_5": 0.9111111111111111,
+    "macro_r_at_10": 0.9833333333333334,
+    "macro_median_rank": 1.0,
+    "pm_r_at_1": 0.6944444444444444,
+    "pm_r_at_5": 0.9333333333333333,
+    "pm_r_at_10": 0.9777777777777777,
+    "pm_median_rank": 1.0,
+    "sis_r_at_1": 0.6055555555555555,
+    "sis_r_at_5": 0.8888888888888888,
+    "sis_r_at_10": 0.9888888888888889,
+    "sis_median_rank": 1.0
+  },
+  "time_sky_baseline_validation_metrics": {
+    "waveform": 0.0,
+    "time": 0.25,
+    "sky": 4.0,
+    "macro_r_at_1": 0.26944444444444443,
+    "macro_r_at_5": 0.5111111111111111,
+    "macro_r_at_10": 0.6583333333333333,
+    "macro_median_rank": 5.0,
+    "pm_r_at_1": 0.28888888888888886,
+    "pm_r_at_5": 0.5055555555555555,
+    "pm_r_at_10": 0.6277777777777778,
+    "pm_median_rank": 5.0,
+    "sis_r_at_1": 0.25,
+    "sis_r_at_5": 0.5166666666666667,
+    "sis_r_at_10": 0.6888888888888889,
+    "sis_median_rank": 5.0
+  },
+  "n_events": 84,
+  "n_pairs": 3486,
+  "n_full_waveform_scored_pairs": 3240,
+  "n_ood_events": 1,
+  "real_waveform_score_audit": {
+    "available_bbh_pairs": 3240,
+    "n_unique_scores": 3240,
+    "min": 0.2532292939722538,
+    "max": 0.9999896585941315,
+    "std": 0.12257761144308416
+  },
+  "top_pair": {
+    "event_i": "GW230726_002940",
+    "event_j": "GW230814_230901",
+    "time_score": 0.14496482908725739,
+    "sky_score": -0.029082398861646652,
+    "waveform_available": 1,
+    "waveform_score": 0.9999896585941315,
+    "pair_has_ood": 0,
+    "full_waveform_scored": 1,
+    "final_score": 16.652652740478516,
+    "rank": 1
+  },
+  "top_pair_is_full_waveform_scored": true,
+  "top_pair_has_ood": false,
+  "full_waveform_subset_top_pair": {
+    "event_i": "GW230726_002940",
+    "event_j": "GW230814_230901",
+    "time_score": 0.14496482908725739,
+    "sky_score": -0.029082398861646652,
+    "waveform_available": 1,
+    "waveform_score": 0.9999896585941315,
+    "pair_has_ood": 0,
+    "full_waveform_scored": 1,
+    "final_score": 16.652652740478516,
+    "rank": 1
+  },
+  "outputs": {
+    "candidate_shortlist": "/root/autodl-tmp/gw-catalog/runs/real_gwtc34_lensing_search_20260629_full_o4/results/gwtc4_candidate_shortlist_waveform_time_sky.csv",
+    "pair_scores": "/root/autodl-tmp/gw-catalog/runs/real_gwtc34_lensing_search_20260629_full_o4/results/gwtc4_pair_scores_waveform_time_sky.parquet"
+  }
+}

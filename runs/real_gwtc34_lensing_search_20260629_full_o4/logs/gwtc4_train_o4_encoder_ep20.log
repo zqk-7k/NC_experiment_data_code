@@ -1,0 +1,19 @@
+{
+  "generated_at_utc": "2026-06-29T17:46:52.397160+00:00",
+  "gate": "Gate-1 waveform retrieval on held-out real-noise injection catalog",
+  "samples_per_family": 600,
+  "epochs": 20,
+  "pass_threshold": {
+    "min_family_test_r_at_10": 0.5,
+    "macro_test_r_at_10": 0.6
+  },
+  "passed": true,
+  "macro_test_r_at_10": 0.8583333333333334,
+  "min_family_test_r_at_10": 0.8444444444444444,
+  "metrics_csv": "/root/autodl-tmp/gw-catalog/runs/real_gwtc34_lensing_search_20260629_full_o4/results/waveform_gate1_metrics.csv",
+  "model_paths": {
+    "SIS": "/root/autodl-tmp/gw-catalog/runs/real_gwtc34_lensing_search_20260629_full_o4/waveform_gate/sis_real_noise_inceptiontime_ep20_clean/model.pt",
+    "PM": "/root/autodl-tmp/gw-catalog/runs/real_gwtc34_lensing_search_20260629_full_o4/waveform_gate/pm_real_noise_inceptiontime_ep20_clean/model.pt"
+  },
+  "note": "Passing Gate-1 means waveform encoder is informative on held-out real-noise injections. It is not a real-event lensing claim."
+}

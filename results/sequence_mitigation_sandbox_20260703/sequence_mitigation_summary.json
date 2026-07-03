@@ -1,0 +1,112 @@
+{
+  "experiment": "sequence_mitigation_sandbox",
+  "date": "2026-07-03",
+  "output_dir": "/root/autodl-tmp/gw-catalog/results/sequence_mitigation_sandbox_20260703",
+  "catalog_window_years": 10.240413751362588,
+  "n_true_pairs_requested": 60,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "background_densities_events_per_year": [
+    100.0,
+    1000.0,
+    10000.0,
+    100000.0
+  ],
+  "lens_fractions": [
+    0.01,
+    0.001,
+    0.0001
+  ],
+  "budgets": [
+    50,
+    100,
+    200
+  ],
+  "false_pair_tail_samples_per_seed": 350000,
+  "waveform_channel": "calibrated surrogate waveform embedding; not a full strain-level waveform encoder result",
+  "combined_fusion": "z(waveform_embedding) + 0.01 * z(time_delay + sky_localization block)",
+  "high_density_summary": {
+    "density_events_per_year": 100000.0,
+    "time_sky_R10_mean_std": [
+      0.39833558254610885,
+      0.10989207141585645
+    ],
+    "surrogate_waveform_R10_mean_std": [
+      0.6628430049482681,
+      0.06220679697429102
+    ],
+    "combined_R10_mean_std": [
+      0.47537112010796223,
+      0.09311924248620142
+    ]
+  },
+  "realistic_rarity_top50_summary": {
+    "lens_fraction": 0.0001,
+    "time_sky_precision_mean_std": [
+      0.0,
+      0.0
+    ],
+    "surrogate_waveform_precision_mean_std": [
+      0.14666666666666667,
+      0.06110100926607787
+    ],
+    "combined_precision_mean_std": [
+      0.0,
+      0.0
+    ],
+    "time_sky_recall_mean_std": [
+      0.0,
+      0.0
+    ],
+    "surrogate_waveform_recall_mean_std": [
+      0.13652721547458388,
+      0.05778726207882205
+    ],
+    "combined_recall_mean_std": [
+      0.0,
+      0.0
+    ],
+    "time_sky_enrichment_mean_std": [
+      0.0,
+      0.0
+    ],
+    "surrogate_waveform_enrichment_mean_std": [
+      112373727.98742692,
+      47636194.07693051
+    ],
+    "combined_enrichment_mean_std": [
+      0.0,
+      0.0
+    ]
+  },
+  "intermediate_rarity_top50_summary": {
+    "lens_fraction": 0.001,
+    "time_sky_precision_mean_std": [
+      0.0,
+      0.0
+    ],
+    "surrogate_waveform_precision_mean_std": [
+      0.18666666666666668,
+      0.11015141094572205
+    ],
+    "combined_precision_mean_std": [
+      0.3,
+      0.2645751311064591
+    ],
+    "time_sky_recall_mean_std": [
+      0.0,
+      0.0
+    ],
+    "surrogate_waveform_recall_mean_std": [
+      0.17273954116059373,
+      0.10156988915430519
+    ],
+    "combined_recall_mean_std": [
+      0.27721547458389567,
+      0.24870524699266217
+    ]
+  }
+}

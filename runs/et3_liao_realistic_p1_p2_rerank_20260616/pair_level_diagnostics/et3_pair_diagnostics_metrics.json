@@ -1,0 +1,42 @@
+{
+  "path": "runs/et3_liao_realistic_p1_p2_rerank_20260616/pair_level_diagnostics/et3_pair_diagnostics.parquet",
+  "rows": 253000,
+  "true_pairs": 3000,
+  "false_pairs": 250000,
+  "sampling_strategy_counts": {
+    "all_true_pairs": 3000,
+    "hard_false_pairs_top_combined": 50000,
+    "random_false_pairs": 200000
+  },
+  "pair_class_counts": {
+    "lensed_nonpartner_false": 147399,
+    "lensed_unlensed_false": 94912,
+    "true_pm_pair": 1500,
+    "true_sis_pair": 1500,
+    "unlensed_unlensed_false": 7689
+  },
+  "metrics": {
+    "waveform_only": {
+      "variant": "waveform_only",
+      "r@1": 0.6245,
+      "r@5": 0.7978333333333333,
+      "r@10": 0.8541666666666666,
+      "median_true_rank": 1.0,
+      "valid": 6000
+    },
+    "waveform_plus_liao_time_lr_plus_observed_sky_step": {
+      "variant": "waveform_plus_liao_time_lr_plus_observed_sky_step",
+      "r@1": 0.9756666666666667,
+      "r@5": 0.9983333333333333,
+      "r@10": 0.999,
+      "median_true_rank": 1.0,
+      "valid": 6000
+    }
+  },
+  "stage7_summary": "runs/et3_liao_realistic_p1_p2_rerank_20260616/stage7_modality_combinations/stage7_modality_combinations_summary.csv",
+  "weights": {
+    "waveform": 1.0,
+    "liao_time_lr": 1.0,
+    "observed_sky_step": 0.25
+  }
+}

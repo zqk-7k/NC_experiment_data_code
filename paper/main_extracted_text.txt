@@ -1,0 +1,1173 @@
+                   Finding strongly lensed gravitational-wave pairs in
+                                               ground-based detector catalogs
+
+           Fan Zhang , Qikai Zhang , Qiyuan Yang , Jiaqing Huang , Yong Yuan & Xilong Fan ∗
+                                1,2                    1                      3                      4                   5                    3,
+
+
+
+
+       1
+           State Key Laboratory of Ocean Sensing and Ocean College, Zhejiang University, Zhoushan
+                                                  316021, China
+       2
+           Kavli Institute for Astrophysics and Space Research, Massachusetts Institute of Technology,
+                                           Cambridge, MA 02139, USA
+                   School of Physics and Technology, Wuhan University, Wuhan 430072, China
+                         3
+
+
+            Jiangsu Sungo Intelligent Technology Research Center Co., Ltd., Jiangsu 226019, China
+            4
+
+
+            Center for Gravitational Wave Experiment, Institute of Mechanics, Chinese Academy of
+            5
+
+
+                                             Sciences, Beijing, China
+                                 ∗
+                                   Corresponding author: xilong.fan@whu.edu.cn
+
+                                                                             Abstract
+            Strong gravitational lensing can make one compact-binary merger appear as multiple gravitational-wave events.
+            In third-generation surveys, event pairs grow as N 2 , making lens searches a catalog-level combinatorics problem.
+            We address this problem by embedding multi-detector waveforms with an InceptionTime encoder and ranking
+            companions with time-delay and sky-localization information. We train on simulated singular-isothermal-sphere
+            and point-mass lenses in an Einstein Telescope conguration and test on a 9,000-event catalog. The waveform
+            embedding score retrieves 62.5% at rank one and 85.4% within the top ten. The catalog ranking score raises rank-
+            one retrieval to 97.6% and top-ten recall to 99.9%. Run-matched real-noise deployments on GWTC-3 and the
+            GWTC-4.0 O4a release produce follow-up shortlists on public strain. Stress tests show that pair recovery remains
+            false-association limited at realistic lens rarity. The method provides a scalable renement layer for Bayesian lens
+            conrmation.
+
+ 1   Introduction                                                                 27     We    separate     the   search     into    two    readouts.
+                                                                                  28   Companion-image       retrieval   ranks      the   catalog    for
+ 2   The        direct       detection   of    gravitational       waves   from 29     each lensed event and measures where the partner
+ 3   compact-binary coalescences opened a new observa- 30                              image appears.       Complete-pair recovery then asks
+ 4   tional window on the Universe[14]. Strong lensing is a 31                        which high-scoring event pairs remain plausible enough
+ 5   predicted but unconrmed signal in this band[57]. A 32                           for follow-up. Because the second readout is a rare-pair
+ 6   massive galaxy or cluster can split one coalescence into 33                       problem,   precisionrecall and false-candidate counts
+ 7   multiple images that arrive as separate gravitational- 34                         are more informative than a ROC curve dominated by
+ 8   wave events.             These images share the same intrinsic 35                 true negatives[3840].
+ 9   source but dier in amplitude, arrival time and phase
+10   [812]. Finding such pairs would enable precision cos-
+11   mology, tests of wave propagation and new probes of 36                              Our implementation follows this division (Fig. 1).
+12   dark matter[1317].              No condent detection has yet 37                 An InceptionTime waveform encoder rst maps each
+13   been reported[1821].                                                        38   event to an embedding and gives a fast waveform em-
+14     The scientic goal of this work is to nd paired lensed 39                      bedding score.     We refer to the downstream physical
+15   images in a catalog of ground-based gravitational-wave 40                         ranking as the lens-candidate renement stage.               This
+16   events. Current searches usually begin with pair veri- 41                         stage builds pairwise time-delay and sky-localization
+17   cation. Given two events, they test whether the pos- 42                          scores, then combines them with the waveform embed-
+18   terior parameters, a joint Bayes factor, phase consis- 43                         ding score to produce the catalog ranking score for can-
+19   tency or a machine-learning lter supports a common 44                            didate pairs. We train and test this design on simulated
+20   source[2229]. Pair verication is well suited to small 45                        singular-isothermal-sphere and point-mass lenses in an
+21   catalogs, but it leaves a separate discovery problem for 46                       Einstein Telescope three-interferometer conguration.
+22   the third-generation era.                The Einstein Telescope and 47            LIGO HanfordLivingston controls and HNSW scaling
+                                                   4       6
+23   Cosmic Explorer may detect 10 10                         coalescences per 48     tests are reported in the Supplementary Information.
+24   year[3034].            At that scale, every event must be com- 49                We also test catalog density, lens rarity and GWTC
+                                                                              2
+25   pared with a large catalog, unrelated pairs grow as N , 50                        event backgrounds. The pipeline returns a ranked can-
+26   and true lensed systems are expected to be rare[3537]. 51                        didate set for Bayesian conrmation.
+
+
+
+                                                                                   1
+     Figure 1. Workow for catalog retrieval of lensed gravitational-wave pairs. Simulated lensed and isolated
+     events are projected into detector networks, embedded by a waveform encoder, ranked with time-delay and sky-localization
+     information, and assembled into candidate systems. The performance box refers to the balanced ET-3 test catalog; the
+     density and rarity analyses below test the harder astrophysical regime.
+
+
+52   Results                                                        79   companion pairs among 40,495,500 possible event pairs,
+                                                                    80   whereas recall is averaged over 6,000 directed lensed-
+53   The   analysis    follows   the   three-part   structure   set 81   event queries, each ranked against 8,999 non-self can-
+54   out above.       The search target is a pair of lensed 82           didates.   All SIS and PM recalls below use this same
+55   gravitational-wave events in a full catalog. The techni- 83         mixed catalog ranking: the query event is grouped by
+56   cal implementation rst learns a waveform embedding 84              lens family, but the candidate list still contains the
+57   with an InceptionTime encoder, then builds pairwise 85              other lens family and the isolated events.
+58   waveform embedding, time-delay and sky-localization
+                                                                    86     With the waveform embedding score alone, 62.5% of
+59   scores for lens-candidate renement.       The main train-
+                                                                    87   lensed queries rank the companion rst and 85.4% place
+60   ing and test data are simulated SIS, PM and isolated
+                                                                    88   it within the top ten. This is the waveform encoder's
+61   compact-binary events in the ET-3 detector congu-
+                                                                    89   role: it supplies a morphology-based candidate order-
+62   ration (Methods).      We report two related outcomes.
+                                                                    90   ing, but does not by itself resolve all nearest-neighbour
+63   Companion-image retrieval asks whether one lensed
+                                                                    91   ambiguities. The catalog ranking score combines wave-
+64   event retrieves its partner image; this is shown as re-
+                                                                    92   form embedding, time-delay and sky-localization scores
+65   call versus rank cuto.      Complete-pair recovery asks
+                                                                    93   and gives the headline mixed catalog result,R@1 =
+66   whether an accepted event pair remains plausible after
+                                                                    94   0.976 and R@10 = 0.999, over all 6,000 lensed-event
+67   thresholding; for this rarer pair-level task we emphasize
+                                                                    95   queries. The same ranking gives R@1 = 0.965 for SIS
+68   precisionrecall behavior and false-candidate counts.
+                                                                    96   images and R@1 = 0.986 for PM images, with top-ten
+                                                                         recall close to unity for both families.   Removing the
+     Companion-image retrieval in the ET-3
+                                                                    97
+69
+                                                                    98   waveform embedding score lowers the overall R@1 to
+70   catalog                                                        99   0.715, so the encoder is an essential component rather
+                                                                   100   than an optional addition. This weighted form of the
+71   We rst evaluated companion-image retrieval in the
+                                                                   101   catalog ranking score was more stable than logistic re-
+72   simulated ET-3 catalog.       The catalog contains 9,000
+                                                                   102   gression, histogram gradient boosting and a small tab-
+73   events, made of 3,000 two-image lensed systems (6,000
+                                                                   103   ular neural network, and is used as the default ranking
+74   lensed events) and 3,000 isolated events (Methods). For
+                                                                   104   score in the main analysis.
+75   each lensed event, its companion image is the only cor-
+76   rect match.   A query is counted as successful at rank 105            The family split explains why the auxiliary observ-
+77   k if that companion appears among the top k candi- 106              ables matter. SIS delays are set by the lens velocity dis-
+78   dates. Thus the catalog contains 3,000 true unordered 107           persion and sourcelens alignment, and overlap strongly
+
+
+
+                                                                     2
+                                                                       1.0            144   were 0.882 and 0.842.
+
+         Waveform                                                                     145     The same thresholding logic was then applied to
+                        0.62   0.85   0.67   0.89   0.57   0.82
+        embedding                                                                     146   a GWTC-3 real-background diagnostic with 200 syn-
+                                                                       0.8
+                                                                                      147   thetic injected true-pair rows. At target false-pair ex-
+                                                                                                                    −2
+        Time delay      0.13   0.53   0.01   0.11   0.25   0.95
+                                                                       0.6            148   ceedance rates of 10         ,   10−3 and 10−4 , the injected-
+
+
+
+
+                                                                             Recall
+                                                                                      149   pair recalls were 0.605, 0.235 and 0.035.          The corre-
+
+                Sky                                                    0.4            150   sponding false-pair counts were 524, 53 and 6. For the
+                        0.54   0.94   0.54   0.95   0.55   0.94
+        localization                                                                  151   real GWTC-3 and O4a catalogs, there are no conrmed
+
+                                                                       0.2            152   lens labels. We therefore treat all real pairs as a null
+            Catalog     0.98   1.00   0.96   1.00   0.99   1.00                       153   background. The top ten entries correspond to within-
+            ranking
+                                                                       0.0            154   catalog tail fractions of 10/1953 = 0.00512 for GWTC-
+                       Overall Overall SIS SIS PM PM
+                        R@1 R@10 R@1 R@10 R@1 R@10
+                                                                                      155   3 and   10/3486 = 0.00287 for O4a.              These thresh-
+                                                                                      156   old exceedances dene candidate shortlists for Bayesian
+                                                                                      157   follow-up, not detections or false-discovery rates.
+      Figure 2. ET-3 companion retrieval by lens fam-
+      ily and retrieval score. Recall at rank 1 and rank 10
+      are shown for the waveform embedding, time-delay, sky- 158                            Complete-pair recovery is limited by
+      localization and catalog ranking scores. All recalls are com-
+      puted in the same 9,000-event mixed ET-3 catalog. Over-
+                                                                    159                     density and rarity
+      all columns average over all lensed-event queries, whereas 160                        We next tested whether high-ranking edges can be
+      SIS and PM columns group the same mixed catalog rank-
+                                                                    161                     called as complete lensed pairs, a harder task than com-
+      ing by the query event's lens family. The catalog ranking
+                                                                                            panion retrieval because every accepted edge competes
+      score combines waveform embedding, time-delay and sky- 162                                              2
+      localization scores.                                          163                     against order N       unrelated pairs.      Even a small per-
+                                                                                      164   pair error rate can dominate the catalog.           We report
+                                                                                      165   pair recovery using precision, thresholded false-pair ex-
+108   with unrelated event separations in the catalog win- 166                              ceedance and xed budget shortlist behavior (Fig. 5;
+109   dow.    The time-delay score alone therefore gives                     SIS 167        Methods).
+110   R@1 = 0.012 and R@10 = 0.111. PM delays are more 168                                    The high recall reported above is obtained on a cata-
+111   distinctive in the adopted mass range, so the time-delay 169                          log far sparser and far richer in lensed events than an as-
+112   score alone moves most PM companions into the top ten 170                             trophysical 3G search. We therefore stress-tested rank-
+113   (R@10 = 0.951). It still gives only R@1 = 0.247, be- 171                              ing on observable-summary catalogs that reproduce the
+114   cause many unrelated candidates have comparable de- 172                               lensing physics of the main simulations. At the high-
+115   lays. Waveform embedding and sky-localization scores 173                              est tested density, 10 events yr−1 , the time delay plus
+                                                                                                                    5
+
+116   supply complementary information, and the catalog 174                                 sky localization score gave top 10 recall 0.398 ± 0.110
+117   ranking score gives near-unity top-ten recall for both 175                            (Fig. 5a). A calibrated surrogate waveform embedding
+118   lens families. Figure 2 summarizes the single-score di- 176                           improved this to 0.663 ± 0.062. A weak combined score
+119   agnostics and the catalog ranking score, and Fig. 3 177                               reached   0.475 ± 0.093.         The median companion rank
+120   shows the same separation in feature space.                                     178   was about 164 for time delay plus sky localization, com-
+121     The same validation-selected score was then evalu- 179                              pared with 4 for the surrogate waveform embedding.
+122   ated over all unordered event pairs in the ET-3 test 180                                The astrophysical strong-lensing fraction is expected
+                                                                    (︁9000)︁
+123   catalog (Fig. 4). This pair-level table contains
+                                                      2                           = 181     to be of order   10−3 [3537].        At this rarity, false as-
+124   40,495,500 pairs, of which 3,000 are true lensed dou- 182                             sociations become the decisive quantity, so precision
+125   blets. The unordered pair score uses the larger of the 183                            and false-discovery measures directly track the cata-
+126   two directed row-standardized scores, since the retrieval 184                         log burden[39, 40].    In a top 50 xed budget shortlist
+                                                                                                                  −3
+127   score is dened per query event. Because true negatives 185                           at lens fraction 10      , time delay plus sky localization
+128   dominate this low base-rate problem (a positive rate of 186                           recovered no true pairs. The surrogate waveform em-
+129   7.41 × 10−5 ), the pair-level ROC is saturated and is not 187                         bedding alone gave precision 0.187 ± 0.110 and recall
+130   used as the main diagnostic; precisionrecall is the rele- 188                        0.173±0.102. The weak combined score increased these
+131   vant summary. The pair-level AUPRC is 0.835. At the 189                               values to 0.300 ± 0.265 and 0.277 ± 0.249. At lens frac-
+                                                                                                   −4
+132   threshold closest to 50% pair recall, the catalog retains 190                         tion 10   , only the surrogate waveform embedding re-
+133   1,500 true pairs and 201 false pairs, giving precision 191                            tained non-zero recovery, with precision 0.147 ± 0.061
+                                                           −6
+134   0.882 at a false-positive rate of 4.96 × 10               .                     192   and recall 0.137 ± 0.058.
+135     We further thresholded the nal unordered-pair score 193                              These sandbox tests show that waveform sequence in-
+136   to quantify the follow-up burden directly (Fig. 4c). In 194                           formation can mitigate the density limit of observable-
+137   the labeled ET-3 pair table, false-pair exceedance was 195                            only ranking.    They also show that xed budget re-
+138   computed only after removing the 3,000 true compan- 196                               covery remains sensitive to the fusion rule at very low
+                                                                      −5
+139   ion pairs.       A target false-pair exceedance of 10                    re- 197      lens fractions. The large catalog waveform curves use
+140   tained 2,619 true pairs and 405 false pairs. This gave 198                            calibrated surrogate embeddings rather than full strain
+141   pair recall 0.873 and precision 0.866. Thresholds cho- 199                            encoders. They therefore support candidate generation
+142   sen near 50% and 90% pair recall retained 201 and 505 200                             design, not detection signicance. Conrmation at real-
+143   false pairs, respectively. The corresponding precisions 201                           istic rarity still requires a discriminating follow-up stage
+
+
+
+                                                                                        3
+                                                        Simulated non-lensed pairs                 SIS companion pairs           PM companion pairs            GWTC catalog pairs                     Top-ranked GWTC pair
+                              ET-3 component scores
+              a                                Time delay score                      b                           Sky localization score                    c                                  Waveform score
+             Density
+              ET-3
+
+
+
+
+                                        0            2                 4                              0          10         20         30             40                 −2               0         2        4              6
+                                               Time delay score                                                  Sky localization score                                                       Waveform score
+
+                              GWTC-3 (O3) unlabelled catalog-pair backgrounds
+                                               Time delay score                                                  Sky localization score                                                       Waveform score
+              d                                                                      e                                                                     f
+                      1.00     scored pairs=1,953                                                     scored pairs=1,953                                                 scored pairs=1,485
+
+                      0.75
+       GWTC-3
+        Density
+
+
+
+
+                      0.50
+
+                      0.25
+
+                      0.00
+                              −3        −2      −1       0         1            2                  −12.5    −10.0      −7.5     −5.0      −2.5    0.0                         0.4               0.6             0.8         1.0
+                                               Time delay score                                                  Sky localization score                                                       Waveform score
+
+                              GWTC-4.0 O4a unlabelled catalog-pair backgrounds
+                                               Time delay score                                                  Sky localization score                                                       Waveform score
+              g                                                                      h                                                                     i
+                               scored pairs=3,486                                                     scored pairs=3,486                                                 scored pairs=3,240
+           GWTC-4.0 O4a
+
+
+
+
+                          2
+             Density
+
+
+
+
+                          1
+
+
+
+                          0
+                                   −1             0            1                                   −12.5    −10.0     −7.5      −5.0   −2.5      0.0                      0.5        0.6         0.7      0.8         0.9   1.0
+                                               Time delay score                                                  Sky localization score                                                       Waveform score
+
+                              Catalog ranking score
+              j                                       ET-3                           k                                     GWTC-3                          l                                  GWTC-4.0 O4a
+                       0.8
+
+                       0.6
+            Density
+
+
+
+
+                                                                                         Density
+
+
+
+
+                                                                                                                                                               Density
+
+
+
+
+                       0.4
+
+                       0.2
+
+                       0.0
+                                        0         5        10              15                        −10        −5         0        5            10                                 −10         0           10
+                                             Catalog ranking score                                               Catalog ranking score                                                Catalog ranking score
+
+
+      Figure 3. Pair-level score separation and real-catalog score backgrounds. (ac) ET-3 time-delay, sky-localization
+      and waveform embedding score distributions for true SIS companion pairs, true PM companion pairs and sampled non-
+      lensed/background pairs. PM pairs separate most strongly in time, while SIS pairs rely more on sky-localization and
+      waveform embedding scores. (df) GWTC-3 O3 time-delay, sky-localization and waveform embedding score backgrounds.
+      (gi) GWTC-4.0 O4a time-delay, sky-localization and waveform embedding score backgrounds. These GWTC panels show
+      unlabelled catalog pairs rather than conrmed lensed pairs. (jl) Catalog ranking score distributions for ET-3, GWTC-3
+      and GWTC-4.0 O4a. The two GWTC catalogs are treated as empirical null backgrounds. Labels give scored event pairs
+      rather than events; waveform embedding panels include only pairs with deployable waveform embeddings. Red markers
+      denote the top-ranked GWTC pair in each catalog. The GWTC catalog pairs dene follow-up context only and are not
+      lensing detections.
+
+
+202   such as full Bayesian posterior overlap or joint param- 210                                                             ow, each with a run-matched real-noise waveform en-
+203   eter estimation[22, 24, 25].                                                                                   211      coder.    The GWTC-3 deployment keeps the existing
+                                                                                                                     212      O3-noise encoder and uses 63 events with parameter-
+
+204   GWTC backgrounds test candidate re-                                                                            213      estimation support, giving 1,953 unordered pairs[4].
+
+
+      nement
+                                                                                                                     214      For O4a, we queried a later GWOSC O4 event API
+205
+                                                                                                                     215      endpoint, which returned 140 public entries. This API
+
+206   We also tested the lens-candidate renement stage on 216                                                                count includes entries beyond the 128 new GWTC-4.0
+
+207   observed GWTC event backgrounds.                                               GWTC-3 and 217                           O4a compact-binary candidates reported in the cata-
+
+208   the GWTC-4.0 O4a release are treated as two inde- 218                                                                   log paper.         We therefore dene the analysis sample
+
+209   pendent real-catalog deployments of the same                                                         work- 219          by parameter-estimation support and real HEALPix
+
+
+
+                                                                                                                       4
+                      a                          Companion-image retrieval                                  b                      Pair-level precision-recall                                                c                               False-pair burden
+                                                                                                                     0
+                                                                                                                                                                                                                                                         near complete
+                                  1.0                                   Catalog ranking                     10                                                                                                                                              P=0.07
+                                                                        Sky localization
+                                                                                                                                                            50% recall
+
+
+
+
+                                                                                                                                                                                       False pairs above threshold
+                                                                        Waveform                                                                            precision 0.882
+                                  0.8                                                                             −1                                                                                                      4                                                          high recall
+                                                  R@1 : 0.625 → 0.976                                       10                                                                                                       10
+       Companion recall
+
+
+
+
+                                                                                                                                                                                                                                                                                     P=0.42
+
+
+
+
+                                                                                                Precision
+                                  0.6                                                                             −2
+                                                                        Time delay                          10                                                                                                            3                                        10−5 false rate
+                                                                                                                                                                                                                     10                                            P=0.87
+                                  0.4
+                                                                                                                  −3                                                                                                                                                           90% recall
+                                                                                                            10                                                                                                                                                                 P=0.84
+                                                                                                                                                                                                                          2                              50% recall
+                                  0.2                                                                                                                                                                                10              strict
+                                                                                                                                                                                                                                                         P=0.88
+                                                                                                                                                                                                                                     P=0.76
+                                                                                                                  −4                                              catalog prevalence
+                                                                                                            10
+                                  0.0
+                                        0    1                    5                     10                                  0.0     0.2         0.4         0.6         0.8    1.0                                            0.00       0.25        0.50          0.75        1.00
+                                                       Rank cutoff K                                                                      Recall (true pairs)                                                                                 Recall (true pairs)
+
+
+      Figure 4. Retrieval gains must be read together with false-pair burden. (a) Companion-image recall as the rank
+      cuto K is relaxed for the waveform embedding, time-delay, sky-localization and catalog ranking scores. (b) Unordered
+      pair-level precisionrecall curve for all 40,495,500 ET-3 test-catalog event pairs. The orange marker denotes the threshold
+      closest to 50% pair recall. (c) False-pair burden as a function of true-pair recall in the same labeled ET-3 pair table. Point
+      labels give the precision at representative operating points.
+
+
+                                                                  Time delay + sky localization                                   Surrogate waveform embedding                                                Surrogate waveform + time + sky
+
+
+
+                        a                             Density stress test                                             b                      Top 50 shortlist precision                                                        c                  Top 50 shortlist recall
+                                                                                                                                                                                                                                   0.6
+       Companion retrieval R@10
+
+
+
+
+                                  1.0
+                                                                                                                            0.6
+                                  0.8                                                                                                                                                                                                                       0.28
+                                                                                                                                                        0.30
+                                                                                             0.66                                                                                                                                  0.4
+                                                                                                                Precision
+
+
+
+
+                                  0.6                                                                                       0.4                                                                                           Recall
+                                  0.4                                                        0.40
+                                                                                                                                                                                                                                   0.2
+                                                                                                                            0.2
+                                  0.2
+
+                                  0.0                                                                                       0.0                                                                                                    0.0
+                                             2                3                4                                                        −2                       −3                  −4
+                                        10               10               10               10   5
+                                                                                                                                   10                       10                  10                                                       10−2                 10−3                      10−4
+                                                                                   −1                                                              Lens fraction                                                                                       Lens fraction
+                                                 Event density (events yr )
+
+
+                                                                         Waveform curves use calibrated surrogate embeddings, not full strain encoders for large catalogs.
+
+
+      Figure 5. Calibrated waveform sequence information mitigates observable-only density limits. (a) Full catalog
+      top 10 companion recall as the background event density increases at xed lens physics. (b,c) Precision and recall for a
+      top 50 shortlist at decreasing lens fraction. Points and error bars show the mean and seed-to-seed standard deviation over
+      three seeds. The waveform curves use calibrated surrogate waveform embeddings matched to the ET-3 waveform embedding
+      baseline, not full strain encoders for large catalogs. The combined curve gives the surrogate waveform score dominant weight
+      and adds a weak time delay plus sky localization term.
+
+
+220   sky maps, retaining 84 primary events and 3,486 un- 235                                                                                                rations reach                             R@10 = 1.000.                                    For the GWTC-4.0
+221   ordered pairs[20, 41].                                             Public H1L1 strain is su- 236                                                     O4a deployment, the O4-noise run-matched encoder is
+222   cient to compute waveform embeddings for 55 GWTC-3 237                                                                                                 trained on 600 systems per family for 20 epochs.                                                                                  It
+223   events and 81 O4a events, corresponding to 1,485 and 238                                                                                               passes the same gate with macro R@10 = 0.858 and
+224   3,240 waveform-scored pairs.                                                                                                                    239    minimum-family                                           R@10 = 0.844.                           Validation selects
+                                                                                                                                                      240    a constrained three-score catalog ranking with non-
+225               Every recall number in these deployments is mea- 241                                                                                       zero waveform embedding, time-delay and HEALPix
+226   sured                             on       synthetic            lensed       pairs            injected                      into        real 242       sky-localization weights.                                                        Relative to the time-delay
+227   o-source detector noise, not on the GWTC events 243                                                                                                   plus sky-localization baseline, the catalog ranking score
+228   themselves.                                    The real catalogs contain no conrmed 244                                                               raises rst-rank injection recall from 0.269 to 0.650 and
+229   lenses and therefore provide no ground truth for re- 245                                                                                               top-ten recall from 0.658 to 0.983.
+230   call.                         The GWTC-3 waveform embedding gate passes
+231   with macro                                    R@10 = 0.914.                       Relative to the time- 246                                                     The lower O4a rst-rank recall reects the held-out
+232   delay plus HEALPix sky-localization baseline, adding 247                                                                                               validation set used for that deployment. In these injec-
+233   the waveform embedding score raises rst-rank injec- 248                                                                                               tions, true-pair time separations overlap random-pair
+234   tion recall from 0.881 to 0.983, while both congu- 249                                                                                                separations much more strongly than in the GWTC-
+
+
+
+                                                                                                                                                        5
+250   3 validation set.   The time-delay plus sky-localization                                          GWTC-3 top 10 shortlist
+251   baseline is therefore less discriminative for O4a.     The
+                                                                               a
+                                                                          01 191219/191230
+252   waveform embedding score still changes the practical                02 190828/200208
+253   retrieval regime: it moves the macro median rank from               03 190630/190708
+                                                                          04 191219/200112
+254   5 to 1 and restores top-ten recall from 0.658 to 0.983.
+                                                                          05 190828/200208
+255   The selected O4a weights prioritize this top-ten follow-            06 190630/190706
+256   up recovery; larger waveform embedding weights gave                 07 190519/190925
+257   higher R@1 but lower R@10.                                          08 190925/200224
+                                                                          09 190413/190707
+258     The real GWTC pairs are then ranked as empir-
+                                                                          10 190413/200208
+259   ical null backgrounds.     The highest-ranked GWTC-
+                                                                                             0      2         4     6         8          10
+260   3 pair is GW191219_163120GW191230_180458, and
+                                                                                                         Catalog ranking score
+261   the highest-ranked O4a pair is GW230726_002940
+                                                                                                    GWTC-4.0 O4a top 10 shortlist
+262   GW230814_230901. Their waveform embedding, time-                         b
+                                                                          01 230726/230814
+263   delay, sky-localization and catalog ranking score back-             02 231231/240104
+264   grounds are shown in Fig. 3, and the top 10 shortlists              03 231223/240104
+265   are shown in Fig. 6.    Both top pairs have deployable              04 230911/231231
+                                                                          05 231223/231231
+266   waveform embedding scores. The O4a top pair is a BBH
+                                                                          06 230911/240104
+267   pair with waveform embeddings for both events and is                07 230630/230707
+268   not agged as out of distribution. In the O4a deploy-               08 230911/231029
+269   ment audit, all 3,240 BBH pairs with waveform embed-                09 231029/240109
+                                                                          10 230726/240104
+270   dings have unique waveform embedding scores, with a
+271   standard deviation of 0.123. The historical GW170104
+                                                                                             0           5          10              15
+                                                                                                         Catalog ranking score
+272   GW170814 candidate has a separation of 222.01 days
+273   and ranks 272nd of 1,953 GWTC-3 pairs under the cat-                                       waveform scored    neutral waveform
+274   alog ranking score. These ranks dene follow-up con-
+275   text only; they are ranked catalog coincidences, not
+                                                                         Figure 6. Real-catalog candidate shortlists on
+276   lensing detection signicances.                                    GWTC-3 and the GWTC-4.0 O4a release. (a,b) Top
+                                                                         10 real-catalog pairs under the catalog ranking score for
+
+277   Discussion                                                         GWTC-3 and GWTC-4.0 O4a. Filled markers denote pairs
+                                                                         with deployable waveform embeddings, and open markers
+                                                                         denote neutral waveform embedding contributions. The real
+278   We formulated strongly lensed gravitational-wave iden-             catalogs are treated as unlabeled empirical backgrounds.
+279   tication as a full-catalog retrieval problem. This fram-          These pairs are ranked catalog coincidences for follow-up
+280   ing is dierent from testing a pre-selected pair, because          and have not passed Bayesian lensing conrmation.
+281   the search object is a catalog in which unrelated event
+282   pairs vastly outnumber true lensed systems. The neural
+283   encoder rst gives each query event a waveform embed- 308          rankers tested here.
+
+284   ding score against its neighbours.    The   lens-candidate 309       A central design choice is that the ranking stage uses
+
+285   renement stage then checks whether these neighbours 310           only quantities that would be available in a search.
+
+286   also have lensing-like time-delay and sky-localization 311         True sky positions are used to generate simulated mea-
+
+287   consistency. The resulting catalog ranking score is in- 312        surements but are not passed to the ranking stage.
+
+288   terpretable at the level of individual observables and 313         The sky-localization score is built from a network-SNR-
+
+289   can be used to rank candidate pairs for follow-up.           314   dependent localization area and an observed sky cen-
+
+290     The ET-3 results show that the waveform encoder is 315           ter, which are then converted to pairwise localization
+
+291   essential but not sucient. The waveform embedding 316             scores. This prevents an oracle sky feature from den-
+
+292   score alone retrieves many companions, yet noisy full- 317         ing the main result.        It also sets a clear boundary on
+
+293   catalog ranking still leaves enough near-neighbour con- 318        the present analysis. The current sky model is a com-
+
+294   fusion to limit rst-rank recovery. Conversely, the time- 319      pact A90 -based surrogate; fast localization posteriors or
+
+295   delay plus sky-localization score without waveform em- 320         HEALPix sky maps are needed before the same logic
+
+296   bedding reaches only 71.5% rst-rank recall, compared 321          can be used in a production search.
+
+297   with 97.6% for the catalog ranking score. The auxiliary 322          The catalog stress tests show why high retrieval recall
+298   observables resolve dierent ambiguities.       The time- 323      should be interpreted with care. At low event density,
+299   delay score is most eective for the point-mass pop- 324           the time delay and sky localization windows are sparse,
+300   ulation, whose delay distribution is more distinctive in 325       so the true companion is often isolated among unrelated
+301   the simulated mass range.     The sky-localization score 326       events.   As the background density approaches third-
+302   contributes for both lens families, especially when time 327       generation rates, unrelated events increasingly occupy
+303   delays overlap the unrelated-event background.         The 328     the same windows and the top 10 retrieval rate falls.
+304   validation-selected catalog ranking score therefore pro- 329       The calibrated surrogate sandbox shows that waveform
+305   vides a practical compromise: it keeps the score trans- 330        sequence information can mitigate this loss, but it does
+306   parent, allows weak components to be down-weighted, 331            not remove the low base rate problem.                    At realistic
+307   and performed more stably than the tabular learned 332             lens rarity, pair-level false associations dominate the
+
+
+
+                                                                     6
+333   accepted edge set even when the per-pair false-positive 390      proximately ten-year window.        We simulate two lens
+334   rate is small.   The method can reduce the number of 391         families.   Singular-isothermal-sphere (SIS) lenses pro-
+335   pairs requiring expensive conrmation, while nal lens 392       duce two opposed images.       Their magnications are
+336   claims still need posterior-overlap, phase-consistency or 393    set by sourcelens alignment, and their Fermat delay
+337   joint-parameter-estimation analyses.                       394   is computed from the lens velocity dispersion (100
+338     The GWTC tests support this renement interpreta- 395          300 km s−1 ). Point-mass (PM) lenses, with lens masses
+                                                                                        4   10
+339   tion on observed catalog backgrounds. They also dene 396        sampled from 10 10     M⊙ , provide a complementary
+340   the present boundary.     GWTC-3 and the GWTC-4.0 397            image geometry with a distinct time delay[5, 7, 10, 11].
+341   O4a sample use separate run-matched encoders rather 398          PM systems are retained only when the interimage de-
+342   than a single shared embedding space, so we report 399           lay is at least 24 s and both image magnications satisfy
+343   the two catalogs separately. A merged cross-run rank- 400        |µ| ≥ 1. These controlled SIS and PM parameter ranges
+344   ing would require re-embedding all events with one en- 401       were chosen with reference to the delay and magni-
+345   coder and recalibrating the score distributions across 402       cation regimes represented in the GW-LMC catalog of
+346   observing runs.     The scale-aware preprocessing audit 403      Li, Liao and collaborators[42]. Each lensed system con-
+347   is important because an absolute normalization       oor 404    tributes two images. Isolated events form the singleton
+348   can collapse public strain inputs and make all wave- 405         background.     For each lens family we generate 10,000
+349   form embedding scores identical. After correction, the 406       systems, and we also generate 10,000 isolated events.
+350   waveform embedding score improves held-out real-noise 407        Each family is split into 70% training, 15% validation
+351   injection validation in both deployments, and the O4a 408        and 15% testing. The mixed ET-3 validation and test
+352   waveform embedding score audit no longer shows a col- 409        catalogs each contain 1,500 SIS systems, 1,500 PM sys-
+353   lapsed score distribution.    The lower O4a rst-rank 410        tems and 3,000 isolated events. This gives 9,000 events
+354   recall is a validation-domain limitation, while its top- 411     in total and 6,000 lensed query images.
+355   ten recovery remains suitable for follow-up shortlisting. 412      Strains are projected onto the detector network and
+356   The real catalogs still provide only empirical null con- 413     colored Gaussian     noise at the    target sensitivity   is
+357   texts. The historical GW170104GW170814 pair is not 414          added[4345].     The principal catalog uses the Ein-
+358   promoted to the top of the present GWTC-3 ranking. 415           stein Telescope three-detector triangular conguration,
+359   Its long time separation is disfavoured by the time-delay 416    whose three co-located interferometers we denote ET-
+360   score, which is a useful guard against background coin- 417      3[30, 31]. This is not a multi-site network. The median
+361   cidences but could down-rank true lenses with unusu- 418         90% localization area we adopt (∼20 square degrees for
+362   ally long delays.                                          419   ET-3) is specic to this conguration and source pop-
+363     Several extensions are needed before deployment. 420           ulation, and should be read against the known depen-
+364   First, the ranked candidate list should be coupled to 421        dence of gravitational-wave localization on detector net-
+365   a fast conrmation stage and evaluated under a xed 422          work geometry and parameter-estimation method[46
+366   follow-up budget.     Second, the sky-localization score 423     49].
+367   should be computed from rapid localization posteri- 424            Before training the encoder, we inspected the simu-
+368   ors across realistic detector networks, with systematic 425      lated observables that later dene the physical rene-
+369   checks of localization area and sky-error calibration. 426       ment stage. The PM and SIS populations occupy dier-
+370   Third, the waveform encoder should be validated with 427         ent regions of the interimage-delay distribution, so the
+371   larger real-noise injection campaigns and under net- 428         time-delay score can add information beyond the wave-
+372   work changes such as H1L1, ET and ETCE congu- 429             form embedding score (Fig. 7). The detected ET sam-
+373   rations. Finally, learned rankers need stricter negative 430     ples also span broad signal-to-noise-ratio distributions
+374   construction, calibration and family-aware validation 431        for isolated, PM-lensed and SIS-lensed events (Fig. 8).
+375   before they can replace the transparent catalog ranking 432      These checks document the simulation and detector-
+376   score.                                                     433   response regime rather than a separate detection result.
+377     Taken together, the results identify where machine
+378   learning is useful in a lensing search.     The encoder
+379   supplies scalable waveform neighbours, and the lens- 434         Neural retrieval
+380   candidate renement stage makes the candidate set
+                                                                 435   Each event's multi-channel strain is encoded by an
+381   lens-aware. This division keeps the search computation-
+                                                                 436   InceptionTime convolutional network[50] into a xed-
+382   ally feasible while preserving the statistical boundary
+                                                                 437   length embedding, following the broader use of machine
+383   between candidate generation and lens conrmation.
+                                                                 438   learning for gravitational-wave detection, characteriza-
+                                                                       tion and data-quality problems[5154]. The encoder is
+
+      Methods
+                                                                 439
+
+                                                                 440   trained with a contrastive objective that pulls together
+384
+                                                                 441   embeddings of images from the same source and pushes
+
+385   Simulated catalogs                                         442
+
+                                                                 443
+                                                                       apart unrelated events.   In the mixed ET-3 run, each
+                                                                       training epoch contains 14,000 lensed image pairs and
+386   Compact-binary sources are generated with component 444          14,000 isolated self pairs.   After training, all catalog
+387   masses uniform in [10, 70] M⊙ , isotropic sky positions, 445     embeddings are computed once. The waveform embed-
+388   redshifts drawn uniformly in comoving volume out to 446          ding score is the inner product of L2-normalized em-
+                                                                                                                  2
+389   z = 2, and geocenter arrival times uniform over an ap- 447       beddings. Exhaustive evaluation is O(N         ) and is used
+
+
+                                                                   7
+                                                                                                  Time delay between lensed images
+                                ET PM delay distribution                                                                          Delay vs PM lens mass                                                           Delay vs source position
+                               median=3.8e+04 s                                                                    0                                                                                   0
+                                                                                                              10                                                                                  10
+
+
+
+
+                                                                                          Time delay [days]
+
+
+
+
+                                                                                                                                                                              Time delay [days]
+                 400
+                                                                                                                   −1                                                                                  −1
+                                                                                                              10                                                                                  10
+         Count
+
+
+
+
+                                                                                                                   −2                                                                                  −2
+                 200                                                                                          10                                                                                  10
+                                                                                                                   −3                                                                                  −3
+                                                                                                              10                                                                                  10
+                          0
+                                      2               3             4                 5                                       8                        9                     10                             0.0           0.1          0.2            0.3
+                                 10           10               10                10                                      10                       10                    10
+                                          A/B time delay [s]                                                                             PM lens mass                                                                   Source position y
+
+                                ET SIS delay distribution                                                               Delay vs SIS velocity dispersion                                                          Delay vs source position
+                                                                                                                   3                                                                                   3
+                               median=3.4e+06 s
+                                                                                                              10                                                                                  10
+                                                                                          Time delay [days]
+
+
+
+
+                                                                                                                                                                              Time delay [days]
+                 300                                                                                               2                                                                                   2
+                                                                                                              10                                                                                  10
+         Count
+
+
+
+
+                                                                                                                   1                                                                                   1
+                 200                                                                                          10                                                                                  10
+                                                                                                                   0                                                                                   0
+                 100                                                                                          10                                                                                  10
+                                                                                                                   −1                                                                                  −1
+                                                                                                              10                                                                                  10
+                          0
+                                      4           5            6             7              8                                          200                  400                                             0.0           0.1          0.2            0.3
+                                 10          10           10            10            10
+                                          A/B time delay [s]                                                                      SIS velocity dispersion                                                               Source position y
+
+
+      Figure 7. Time-delay structure of the simulated lens populations.                  Interimage-delay distributions and lens-
+      parameter dependences for the PM and SIS systems used in the ET-3 catalog simulation. The separation between the two
+      lens families motivates using a population time-delay score in the lens-candidate renement stage.
+
+
+                                                                                 Optimal SNR distributions after ET selection
+
+                                          ET isolated events                                                                          ET PM lensed images                                                             ET SIS lensed images
+                      3       n=9,968                                                                                    n=19,942                                                                           n=19,890
+                 10
+
+                      2
+                 10
+         Count
+
+
+
+
+                      1
+                 10
+
+                      0
+                 10
+                                  3              1        30            2    300                                                  3           1   30            2    300                                          3           1   30        2   300
+                                            10                     10                                                                    10                10                                                            10            10
+                                             Optimal SNR                                                                                 Optimal SNR                                                                     Optimal SNR
+
+
+      Figure 8. Signal-to-noise ratios in the simulated ET catalog. Optimal signal-to-noise-ratio distributions for isolated
+      events and for PM- and SIS-lensed images after the detection selection.
+
+
+448   here for the N               ≤ 9,000 catalogs where it is exact and 460                                                                     inner product equals cosine similarity.
+449   tractable. Thus the main ET-3 ranking scores the dense
+      non-self event-pair matrix. For larger catalogs, HNSW
+                                                                                                                                                  Lens-candidate renement
+450
+                                                                                                                                         461
+451   retrieval[55, 56] is used as a waveform-candidate gen-
+452   erator before lens-candidate renement. The retained-
+                                                                                                                                         462      In the dense ET-3 evaluation, the renement stage
+453   neighbour budget is chosen for a given catalog by com-
+                                                                                                                                         463      scores every non-self event pair. In large-catalog vari-
+454   paring HNSW candidates with exact dense retrieval on
+                                                                                                                                         464      ants,     the same scoring can be applied to HNSW-
+455   tractable subsets and requiring stable dense-neighbour
+                                                                                                                                         465      preselected candidates.                                         The renement stage builds
+456   recovery and partner recall.                                  After this prelter, only
+                                                                                                                                         466      three pairwise scores computed from observable quan-
+457   O(N K) candidate edges are scored, where K is the 467                                                                                       tities.           The time-delay score is a log likelihood ratio
+458   selected per-event follow-up budget.                                                Self-matches are
+                                                                                                                                         468      between a lensed-image delay distribution and a ran-
+459   excluded; because embeddings are L2-normalized, the
+                                                                                                                                         469      dom catalog delay distribution. For the lensed distri-
+
+
+
+                                                                                                                                             8
+470   bution we use the public GW-LMC mock catalog of 530                    and precision are then computed by applying the same
+471   Li, Liao and collaborators, which was built to provide 531             threshold to the true and false pair sets. In the GWTC
+472   signal-to-noise and interimage-delay priors for lensed 532             injection diagnostic, the true rows are the synthetic in-
+473   gravitational-wave identication[42]. In the ET-3 anal- 533            jected lensed pairs. The false rows are real-background
+474   ysis we use the ET BBH Any-Detected-SNR8 image 534                     pairs.   In the real GWTC catalogs, no conrmed lens
+475   table, retain systems with at least two detected im- 535               labels are available.       We therefore treat all real pairs
+476   ages, and form all detected image pairs. This extrac- 536              as a null population.        We report only within-catalog
+477   tion gives 4,388 delays, with median 37.38 days and 537                tail fractions and shortlist sizes, not precision, false-
+478   90th percentile 284.70 days. The background delay dis- 538             discovery rate or detection signicance.
+479   tribution is estimated from random non-partner pairs
+      in the held-out validation catalog. The binned log ra-
+                                                                             Observable-level stress-test catalogs
+480
+                                                                       539
+481   tio is then xed and applied to observed trigger-time
+482   dierences at test time; injected delays are used only
+                                                                       540   The density and rarity stress tests require catalogs far
+483   to generate the simulated catalog. The observed time
+                                                                       541   larger and rarer than the strain-level simulations, for
+484   is the true geocenter time plus jitter that scales with
+                                                                       542   which generating full waveforms is impractical.              We
+485   signal-to-noise ratio.
+                                                                       543   use an observable-summary generator that reproduces
+486     The sky-localization score is computed from an ob- 544               the source priors and SIS/PM lensing equations of the
+487   served sky proxy rather than from the injected sky 545                 main simulations (magnications, Fermat delays) but
+488   position or a learned sky prediction.          For each simu- 546      emits only the observable summaries used by the rank-
+489   lated event, the injected sky coordinate is used only 547              ing stage. Network signal-to-noise is modeled with the
+490   to generate an observed localization summary.              Given 548   correct leading-order scaling. It is calibrated so the me-
+491   the network signal-to-noise ratio ρi , we assign a 90% 549             dian localization area matches the strain pipeline. Each
+492   localization area A90,i    = A90,ref (ρref /ρi )2 ηi , where ηi 550    image's observed sky position is drawn independently
+493   is a lognormal scatter term. We then apply detector- 551               around its true direction, with a width set by its local-
+494   dependent clipping. This area is converted to an eec- 552             ization area. The only quantity not reproduced exactly
+495   tive Gaussian width σi by matching the 90% contain- 553                is the matched-lter signal-to-noise ratio.           The stress
+496   ment area of a two-dimensional tangent-plane Gaus- 554                 tests depend mainly on the relative time, sky and mass
+497   sian. The observed sky center is drawn around the in- 555              structure, which are reproduced at observable level, so
+498   jected direction with this width.                                556   their conclusions are insensitive to this approximation.
+499     Pairwise sky-localization consistency is computed 557                  For the sequence information sandbox, we use the
+500   only from the observed centers and widths. For events 558              same observable-summary generator but add a cali-
+501   i and j , we calculate the observed angular separation 559             brated surrogate waveform embedding.                Each source
+502   θij and the combined width σij = (σi2 + σj2 )1/2 . The 560             is assigned a latent waveform center. Independent en-
+503   normalized separation dij = θij /σij denes the win- 561               coder noise is tuned so that full-catalog waveform em-
+504   dowed sky-localization score used in the main ET-3 562                 bedding retrieval matches the measured ET-3 baseline,
+505   channel analysis. We also test a Gaussian log-overlap 563              R@1 = 0.625 and R@10 = 0.854. This surrogate is used
+                        2       2      2
+506   score,   − log(2πσij ) − θij /(2σij ), in supporting analy- 564        only to test large catalog shortlisting behavior. It is not
+      ses. True sky coordinates are never passed to the rank- 565                                                           5
+507                                                                          a full strain waveform encoder for 10 -event catalogs.
+508   ing stage. We also tested an amplitude channel based 566                 For the density test, each of three random seeds re-
+509   on signal-to-noise-ratio consistency, including a two- 567             quests 60 lensed doublets and scales the unlensed back-
+510   dimensional delaySNR-ratio likelihood ratio extracted 568             ground at xed lens physics. The requested background
+511   from the same GW-LMC table. This amplitude/SNR 569                                      2      3
+                                                                             densities are 10 , 10 , 10
+                                                                                                            4        5
+                                                                                                                and 10    events yr−1 over the
+512   channel is a supporting analysis and is not used in the 570            same observation window. After the signal-to-noise cut,
+513   main reported score unless stated explicitly.                    571   the mean detected catalog sizes over the three seeds
+514     The catalog ranking score is a weighted sum of row- 572              are 590, 4,998, 49,080 and 489,474 events. Companion-
+515   standardized waveform embedding, time-delay and sky- 573               image recall is computed over detected lensed images
+                                       ∑︁
+516   localization scores, Sij    =     m λm z(scorem )ij . We se- 574       that retain a detected partner.
+517   lect the weights on a held-out validation catalog over 575               For the rarity test, we use the same lensed popu-
+518   a grid that includes zero, allowing a component to be 576              lation and size the background to nominal lens frac-
+519   switched o.     The weights are then xed for testing. 577            tions of   10−2 , 10−3 and 10−4 .           After detection cuts,
+520   The waveform embedding weight is also tuned and is 578                 each seed contains on average 53.7 complete true pairs.
+521   driven to zero on the noisy LIGO catalog. We bench- 579                The mean detected catalog sizes are 2,972, 28,802 and
+522   mark this catalog ranking score against logistic regres- 580           286,857 events for the three lens-fraction labels.           We
+523   sion, histogram gradient boosting, a tabular multilayer 581            compare time delay plus sky localization, the calibrated
+524   perceptron and a gradient-boosted ranker on the same 582               surrogate waveform embedding alone and a weak com-
+525   features[57, 58].                                                583   bined score, z(waveform) + 0.01 z(time + sky). We re-
+526     Thresholded       false-pair   diagnostics   use   the   same 584    port xed global shortlist budgets of 50, 100 and 200
+527   unordered-pair catalog ranking score.          In labeled ET- 585      pairs. The false-pair tail is estimated by Monte Carlo
+528   3 catalogs, we remove the 3,000 true companion pairs 586               sampling 350,000 false pairs per seed and scaling to the
+529   before estimating the false-pair exceedance rate. Recall 587           full unordered-pair count.
+
+
+
+                                                                         9
+588   Parameter-scatter sandbox check                                     641   ization. The HEALPix sky-localization score is sij
+                                                                                                                                                sky
+                                                                                                                                                      =
+                                                                                          sky
+                                                                          642   log[max(Oij   , 10−300 )]. Signal-to-noise-ratio and am-
+589   For the parameter-scatter check we compare three re-
+                                                                          643   plitude quantities are retained only as audit columns
+590   trieval scores after adding independent per-event scat-
+                                                                          644   and are not used in the catalog ranking score. We se-
+591   ter to posterior-summary parameters. The parameter-
+                                                                          645   lect ranking weights separately for each deployment on
+592   summary baseline ranks events by nearest-neighbor dis-
+                                                                          646   held-out real-noise injection validation catalogs over the
+593   tance in chirp mass, mass ratio and luminosity distance.
+                                                                          647   grid {0, 0.25, 0.5, 1, 2, 4}. The reported real-catalog de-
+594   The waveform embedding score and the time-delay plus
+                                                                          648   ployments use constrained positive three-score catalog
+595   sky-localization score do not use these intrinsic param-
+                                                                          649   ranking, so waveform embedding, time-delay and sky-
+596   eter summaries, so their scores are held xed while the
+                                                                          650   localization terms all contribute to the catalog ranking
+597   scatter is varied.
+                                                                          651   score.    The selected GWTC-3 weights are 0.25, 0.25
+                                                                          652   and 4.0 for waveform embedding, time-delay and sky-
+
+598   GWTC event analysis                                                 653   localization scores. The selected O4a weights are 1.0,
+                                                                          654   0.25 and 4.0. Exact grid-selected values are recorded in
+599   For the GWTC analyses, the primary real catalog is 655                    the released run metadata. Each catalog ranking score
+600   dened by parameter-estimation support and an avail- 656                  is xed before scoring the corresponding real catalog:
+601   able HEALPix sky map.               Waveform availability is 657          1,953 GWTC-3 pairs and 3,486 O4a pairs. Public strain
+602   treated as a separate audit axis.              The GWTC-3 de- 658         is sucient to compute waveform embeddings for 55 of
+603   ployment uses 63 compact-binary events, giving 1,953 659                  the 63 GWTC-3 events and 81 of the 84 O4a events, cor-
+604   unordered pairs. The O4a deployment corresponds to 660                    responding to 1,485 and 3,240 waveform-scored pairs.
+605   the GWTC-4.0 data release, which reports 128 new 661                      The remaining 468 GWTC-3 pairs and 246 O4a pairs
+606   O4a compact-binary candidates.             Our local GWOSC 662            have at least one event without a deployable embed-
+607   query used a later O4 event API endpoint and returned 663                 ding. For these pairs, the row-standardized waveform
+608   140 public entries before analysis cuts.            Applying the 664      embedding term is set to zero, equivalent to assign-
+609   same parameter-estimation and sky-map requirements 665                    ing the row mean in the waveform embedding score.
+610   retains 84 primary events, giving 3,486 unordered pairs. 666              Their ranking is therefore determined by the available
+611   Events outside the binary-black-hole training prior are 667               time-delay and HEALPix sky-localization terms, while
+612   retained in the catalog but agged as out of distribu- 668                the full catalog remains dened. The shortlist records
+613   tion; pairs containing such events are not used to sup- 669               whether each pair has a deployable waveform embed-
+614   port waveform embedding claims.                                     670   ding score.
+615     For each real catalog, the ET-3 encoder is not reused
+      directly.   We use public H1L1 strain and train run-
+
+                                                                                Data availability
+616
+
+617   matched InceptionTime encoders on synthetic SIS and
+                                                                          671
+618   PM lensed pairs injected into real o-source detector
+619   noise. The GWTC-3 result keeps the existing O3-noise
+                                                                          672   The gravitational-wave event data analysed here are
+620   encoder.    The O4a encoder is trained on 600 systems
+                                                                          673   publicly available from the Gravitational Wave Open
+      per family for 20 epochs using O4a o-source H1L1
+                                                                                Science Center (https://gwosc.org) and the asso-
+621
+                                                                          674
+622   strain injections. A separate O3-to-O4 transfer test is
+                                                                          675   ciated    parameter-estimation         data    releases    on   Zen-
+623   recorded only as an ablation.          The strain preprocess-
+                                                                          676   odo.       The    simulated    catalogs        and   derived      ob-
+624   ing uses per-channel scale-aware standardization, since
+                                                                          677   servable    tables   generated    in    this   study      are   avail-
+      a xed absolute normalization oor can suppress pub-
+                                                                                able in the project repository (https://github.com/
+625
+                                                                          678
+      lic strain amplitudes and collapse the embeddings. A
+626
+                                                                          679   lanhung/gw-catalog).
+627   Gate-1 test on held-out real-noise injections is required
+628   before using the waveform embedding score. The pass
+629
+
+630
+      criterion is macro
+      R@10 > 0.5.
+                              R@10 > 0.6 and minimum-family
+                                                                          680   Code availability
+631     The real-catalog ranking uses three scores: waveform
+                                                                          681   All    analysis   code,   including    neural    retrieval,     lens-
+632   embedding, time-delay and HEALPix sky-localization
+                                                                          682   candidate renement, sparse retrieval and stress-test
+      scores. Each HEALPix map is converted to RING or-
+                                                                                pipelines, is openly available at https://github.com/
+633
+                                                                          683
+634   dering, resampled to a common Nside               = 512, clipped 684 lanhung/gw-catalog.               Some internal script lenames
+635   to nite non-negative values and normalized so that
+      ∑︁                                                                  685   retain historical labels such as gwtc5 or gwtc4p1,
+636
+        p Pip = 1. For events i and j , the sky-posterior over- 686             but the manuscript text refers to the corresponding
+637   lap underlying the sky-localization score is
+                                                                          687   GWTC-4.0 O4a sample consistently.
+                                   ∑︁
+                   sky                   p Pip Pjp
+
+                                                                                References
+                  Oij  = (︂            )︂1/2 (︂∑︁       )︂1/2 ,     (1)
+                                  2                2
+                              ∑︁
+                               p Pip            p Pjp                     688
+
+
+
+638   where p indexes equal-area HEALPix pixels. This ex- 689                    [1] B. P. Abbott et al.       Observation of gravitational
+639   pression is the cosine overlap of the two posterior proba- 690                   waves from a binary black hole merger. Phys. Rev.
+640   bility vectors; the pixel-area factors cancel after normal- 691                  Lett., 116:061102, 2016.
+
+
+
+                                                                           10
+692    [2] B. P. Abbott et al.    GWTC-1:     a gravitational- 743      [17] F. Xu, J. M. Ezquiaga, and D. E. Holz.                    Please
+693       wave transient catalog of compact binary mergers 744              repeat: strong lensing of gravitational waves as a
+694       observed by LIGO and Virgo during the rst and 745                probe of compact binary and galaxy populations.
+695       second observing runs.     Phys. Rev. X, 9:031040, 746            Astrophys. J., 929:9, 2022.
+696       2019.
+                                                                  747   [18] R. Abbott et al. Search for lensing signatures in the
+697    [3] R. Abbott et al. GWTC-2: compact binary coa- 748                 gravitational-wave observations from the rst half
+698       lescences observed by LIGO and Virgo during the 749               of LIGOVirgo's third observing run. Astrophys.
+699       rst half of the third observing run. Phys. Rev. X, 750           J., 923:14, 2021.
+700       11:021053, 2021.
+                                                                  751   [19] R. Abbott et al.      Search for gravitational-lensing
+701    [4] R. Abbott et al. GWTC-3: compact binary coa- 752                 signatures in the full third observing run of the
+702       lescences observed by LIGO and Virgo during the 753               LIGOVirgo network.               Astrophys. J.,       970:191,
+703       second part of the third observing run. Phys. Rev. 754            2024.
+704       X, 13:041039, 2023.
+                                                                  755   [20] R.   Abbott    et   al.      GWTC-4.0:          Searches     for
+705    [5] P. Schneider, J. Ehlers, and E. E. Falco. Gravita-
+                                                                  756       gravitational-wave          lensing    signatures.         arXiv
+706       tional Lenses. Springer, Berlin, 1992.
+                                                                  757       preprint arXiv:2512.16347, 2025.
+
+707    [6] R. D. Blandford and R. Narayan.       Cosmological
+                                                                  758   [21] A.   Chakraborty      and     S.     Mukherjee.        Model-
+708       applications of gravitational lensing.    Annu. Rev.
+                                                                  759       independent        search    discards    faint      lensed-pairs
+709       Astron. Astrophys., 30:311358, 1992.
+                                                                  760       of    gravitational        wave     events     in    the    sub-
+
+710    [7] R. Narayan and M. Bartelmann. Lectures on grav- 761              threshold candidates of GWTC-4. arXiv preprint
+
+711       itational lensing. arXiv preprint astro-ph/9606001, 762           arXiv:2606.03346, 2026.
+
+712       1996.
+                                                                  763   [22] K. Haris et al. Identifying strongly lensed gravita-
+
+713    [8] Y. Wang, A. Stebbins, and E. L. Turner.     Gravita- 764         tional wave signals from binary black hole mergers.
+
+714       tional lensing of gravitational waves from merging 765            arXiv preprint arXiv:1807.07062, 2018.
+715       neutron star binaries. Phys. Rev. Lett., 77:2875
+                                                                  766   [23] C. McIsaac et al. Search for strongly lensed coun-
+716       2878, 1996.
+                                                                  767       terpart images of binary black hole mergers in the
+717    [9] S. Deguchi and W. D. Watson.       Wave eects in 768            rst two LIGO observing runs. Phys. Rev. D, 102:
+718       gravitational lensing of electromagnetic radiation. 769           084031, 2020.
+719       Phys. Rev. D, 34:17081718, 1986.
+                                                                  770   [24] R. K. L. Lo and I. Magana Hernandez. Bayesian
+720   [10] T. T. Nakamura. Gravitational lensing of gravita- 771            statistical    framework        for    identifying     strongly
+721       tional waves from inspiraling binaries by a point 772             lensed gravitational-wave signals.             Phys. Rev. D,
+722       mass lens. Phys. Rev. Lett., 80:11381141, 1998.        773       107:123015, 2023.
+
+723   [11] R. Takahashi and T. Nakamura.           Wave eects 774      [25] J. Janquart et al. Analysis of strongly lensed grav-
+724       in the gravitational lensing of gravitational waves 775           itational waves with joint parameter estimation.
+725       from chirping binaries.    Astrophys. J., 595:1039 776           Mon. Not. R. Astron. Soc., 526:38323860, 2023.
+726       1051, 2003.
+                                                                  777   [26] J. M. Ezquiaga, W. Hu, and R. K. L. Lo. Identi-
+727   [12] L. Dai and T. Venumadhav. On the waveforms of
+                                                                  778       fying strongly lensed gravitational waves through
+728       gravitationally lensed gravitational waves.     arXiv
+                                                                  779       their phase consistency.            Phys. Rev. D, 108(10):
+729       preprint arXiv:1702.04724, 2017.
+                                                                  780       103520, 2023. doi: 10.1103/PhysRevD.108.103520.
+
+730   [13] K. Liao et al.    Precision cosmology from future
+                                                                  781   [27] S. Goyal, D. Harikrishnan, S. J. Kapadia, and
+731       lensed gravitational wave and electromagnetic sig-
+                                                                  782       P. Ajith.     Rapid identication of strongly lensed
+732       nals. Nat. Commun., 8:1148, 2017.
+                                                                  783       gravitational-wave events with machine learning.
+
+733   [14] O. A. Hannuksela et al.    Search for gravitational 784          Phys. Rev. D, 104:124057, 2021.
+
+734       lensing signatures in LIGO-Virgo binary black hole
+                                                                  785   [28] X. Shan, B. Hu, X. Chen, and R.-G. Cai.                      An
+735       events. Astrophys. J. Lett., 874:L2, 2019.
+                                                                  786       interference-based method for the detection of
+
+736   [15] M. Oguri.    Eect of gravitational lensing on the 787           strongly lensed gravitational waves. Nat. Astron.,
+
+737       distribution of gravitational waves from distant bi- 788          9:916924, 2025.
+
+738       nary black hole mergers.     Mon. Not. R. Astron.
+                                                                  789   [29] Fan Zhang, Qikai Zhang, Qiyuan Yang, Jiaqing
+739       Soc., 480:38423855, 2018.
+                                                                  790       Huang,      Yong     Yuan,    and     Xilong   Fan.        Time-
+740   [16] S.-S. Li, S. Mao, Y. Zhao, and Y. Lu.       Gravita- 791         domain deep learning for pairwise identication
+741       tional lensing of gravitational waves: a statistical 792          of strongly lensed gravitational-wave candidates.
+742       perspective. Phys. Rev. D, 98:083005, 2018.             793       arXiv preprint arXiv:2605.29510, 2026.
+
+
+
+                                                                   11
+794   [30] M. Punturo et al. The Einstein Telescope: a third- 846             [44] F. Acernese et al.    Advanced Virgo:     a second-
+795        generation gravitational wave observatory. Class. 847                  generation interferometric gravitational wave de-
+796        Quantum Grav., 27:194002, 2010.                              848       tector. Class. Quantum Grav., 32:024001, 2015.
+
+
+797   [31] B. Sathyaprakash et al. Scientic objectives of Ein- 849           [45] T. Akutsu et al.   Overview of KAGRA: detector
+798        stein Telescope. Class. Quantum Grav., 29:124013, 850                  design and construction history. Prog. Theor. Exp.
+799        2012.                                                        851       Phys., 2021:05A101, 2021.
+
+800   [32] M. Maggiore et al.       Science case for the Einstein 852         [46] S. Fairhurst. Source localization with an advanced
+801        Telescope. J. Cosmol. Astropart. Phys., 2020:050, 853                  gravitational wave detector network. Class. Quan-
+802        2020.                                                        854       tum Grav., 28:105021, 2011.
+
+803   [33] D. Reitze et al.    Cosmic Explorer: the U.S. con- 855             [47] L. P. Singer et al. The rst two years of electromag-
+
+804        tribution to gravitational-wave astronomy beyond 856                   netic follow-up with advanced LIGO and Virgo.
+
+805        LIGO. Bull. Am. Astron. Soc., 51:035, 2019.                  857       Astrophys. J., 795:105, 2014.
+
+
+806   [34] M. Evans et al.          A horizon study for Cosmic 858            [48] L. P. Singer and L. R. Price. Rapid bayesian po-
+
+807        Explorer: science, observatories, and community. 859                   sition reconstruction for gravitational-wave tran-
+
+808        arXiv preprint arXiv:2109.09882, 2021.                       860       sients. Phys. Rev. D, 93:024013, 2016.
+
+
+809   [35] M. Biesiada, X. Ding, A. Piorkowska, and Z.-H. 861                 [49] J. Veitch et al. Parameter estimation for compact
+
+810        Zhu. Strong gravitational lensing of         gravitational 862         binaries with ground-based gravitational-wave ob-
+
+811        waves from double compact binaries:          perspectives 863          servations using the LALInference software library.
+
+812        for the Einstein Telescope. J. Cosmol.          Astropart. 864         Phys. Rev. D, 91:042003, 2015.
+813        Phys., 2014:080, 2014.
+                                                                        865   [50] H. Ismail Fawaz et al.     InceptionTime:    nding
+
+814   [36] A. R. A. C. Wierda et al. Beyond the detector hori- 866                AlexNet for time series classication.    Data Min.
+
+815        zon: forecasting gravitational-wave strong lensing. 867                Knowl. Discov., 34:19361962, 2020.
+
+816        Astrophys. J., 921:154, 2021.
+                                                                        868   [51] E. Cuoco et al. Enhancing gravitational-wave sci-
+
+817   [37] G. P. Smith et al.         Discovering gravitationally 869             ence with machine learning.       Mach. Learn. Sci.
+
+818        lensed gravitational waves: predicted rates, candi- 870                Technol., 2:011002, 2021.
+
+819        date selection, and localization with the Vera Ru-
+                                                                        871   [52] D. George and E. A. Huerta.       Deep learning for
+820        bin Observatory. Mon. Not. R. Astron. Soc., 520:
+                                                                        872       real-time gravitational wave detection and param-
+821        702721, 2023.
+                                                                        873       eter estimation: results with advanced LIGO data.
+
+822   [38] T. Fawcett. An introduction to ROC analysis. Pat-            874       Phys. Lett. B, 778:6470, 2018.
+
+823        tern Recognit. Lett., 27:861874, 2006.
+                                                                        875   [53] H. Gabbard, M. Williams, F. Hayes, and C. Mes-
+
+824   [39] J. Davis and M. Goadrich.           The relationship be-     876       senger. Matching matched ltering with deep net-
+
+825        tween precision-recall and ROC curves.            In Pro-    877       works for gravitational-wave astronomy.         Phys.
+
+826        ceedings of the 23rd International Conference on             878       Rev. Lett., 120:141103, 2018.
+
+827        Machine Learning, pages 233240, 2006.
+                                                                        879   [54] M. Zevin et al. Gravity Spy: integrating advanced
+                                                                        880       LIGO detector characterization, machine learning,
+828   [40] T. Saito and M. Rehmsmeier.              The precision-
+                                                                        881       and citizen science.    Class. Quantum Grav., 34:
+829        recall plot is more informative than the ROC plot
+                                                                        882       064003, 2017.
+830        when evaluating binary classiers on imbalanced
+831        datasets. PLoS ONE, 10:e0118432, 2015.
+                                                                        883   [55] Y. A. Malkov and D. A. Yashunin. Ecient and
+                                                                        884       robust approximate nearest neighbor search using
+832   [41] The LIGO Scientic Collaboration,              The Virgo
+                                                                        885       hierarchical navigable small world graphs.      IEEE
+833        Collaboration, and The KAGRA Collaboration.
+                                                                        886       Trans. Pattern Anal. Mach. Intell., 42:824836,
+834        GWTC-4.0:          Updating    the    gravitational-wave
+                                                                        887       2020.
+835        transient catalog with observations from the rst
+836        part of the fourth LIGO-Virgo-KAGRA observing
+                                                                        888   [56] J. Johnson, M. Douze, and H. Jégou. Billion-scale
+837        run. arXiv preprint arXiv:2508.18082, 2025.
+                                                                        889       similarity search with GPUs.       IEEE Trans. Big
+                                                                        890       Data, 7:535547, 2021.
+838   [42] Youkai Li, Kai Liao, Mingqi Sun, Lilan Yang,
+839        Xuheng Ding, Marek Biesiada, and Tonghua Liu.
+                                                                        891   [57] F. Pedregosa et al. Scikit-learn: machine learning
+840        Mock    catalogs    of   strongly   lensed   gravitational
+                                                                        892       in Python.    J. Mach. Learn. Res., 12:28252830,
+841        waves via a halo model approach with ground-
+                                                                        893       2011.
+842        based detectors.     Astrophys. J. Suppl. Ser., 284:
+843        56, 2026. doi: 10.3847/1538-4365/ae6117.                     894   [58] J. H. Friedman. Greedy function approximation:
+                                                                        895       a gradient boosting machine. Ann. Stat., 29:1189
+844   [43] J. Aasi et al.   Advanced LIGO.         Class. Quantum 896             1232, 2001.
+845        Grav., 32:074001, 2015.
+
+
+
+                                                                         12
+897   Acknowledgements
+898   FZ would like to thank the MIT LIGO Laboratory for
+899   its continuous support and advice.    FZ is supported
+900   by the National Natural Science Foundation of China
+901   (Grant No. 62372409) and the Ministry of Science and
+902   Technology of the People's Republic of China (Grant
+903   No. 2023ZD0120704 of Project No. 2023ZD0120700).
+904   The authors thank Jinxuan Wu for assistance with ex-
+905   perimental testing in this work.
+
+
+
+
+906   Author contributions
+907   F.Z. and X.F. designed the study.    F.Z. and Q.Z. de-
+908   veloped the retrieval and catalog ranking pipeline and
+909   performed the experiments. Q.Y., J.H. and Y.Y. con-
+910   tributed to the simulations, analysis and validation.
+911   F.Z. and X.F. wrote the manuscript.    All authors re-
+912   viewed and approved the manuscript.
+
+
+
+
+913   Competing interests
+914   The authors declare no competing interests.
+
+
+
+
+                                                               13
+

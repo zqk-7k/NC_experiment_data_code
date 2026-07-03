@@ -1,0 +1,42 @@
+{
+  "generated_at_utc": "2026-06-29T17:49:57.487318+00:00",
+  "n_primary_events": 84,
+  "embedding_available_events": 82,
+  "n_pairs": 3486,
+  "n_waveform_available_pairs_raw": 3321,
+  "sis": {
+    "shape": [
+      82,
+      128
+    ],
+    "norm_min": 0.9999999050843856,
+    "norm_mean": 0.9999999983306302,
+    "norm_max": 1.0000000745127775,
+    "dim_std_min": 0.005525191505222097,
+    "dim_std_mean": 0.02488397941842952,
+    "dim_std_max": 0.0592805918233361,
+    "unique_vectors_rounded_8dp": 82
+  },
+  "pm": {
+    "shape": [
+      82,
+      128
+    ],
+    "norm_min": 0.9999998677604767,
+    "norm_mean": 1.0000000018757507,
+    "norm_max": 1.0000000844698183,
+    "dim_std_min": 0.0034686707005053513,
+    "dim_std_mean": 0.024289635106974176,
+    "dim_std_max": 0.05662777659140467,
+    "unique_vectors_rounded_8dp": 82
+  },
+  "waveform_score": {
+    "count": 3321,
+    "n_unique": 3321,
+    "min": 0.2532292939722538,
+    "max": 0.9999896585941315,
+    "std": 0.12214849757305463
+  },
+  "deployment_audit_passed": true,
+  "failure_reason": ""
+}

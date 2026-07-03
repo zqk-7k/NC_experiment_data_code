@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-06-29T17:49:57.054277+00:00",
+  "n_primary_events": 84,
+  "n_embedded_events": 82,
+  "n_pairs": 3486,
+  "n_pairs_with_waveform": 3321,
+  "window_seconds": 24.0,
+  "window_end_offset_seconds": 0.25,
+  "output_embeddings": "/root/autodl-tmp/gw-catalog/runs/real_gwtc34_lensing_search_20260629_full_o4/features/real_waveform_embeddings.parquet",
+  "output_similarity": "/root/autodl-tmp/gw-catalog/runs/real_gwtc34_lensing_search_20260629_full_o4/features/real_waveform_similarity.parquet",
+  "note": "Waveform similarity is exploratory real-event embedding. Final real-catalog fusion may set waveform weight to zero unless a validation-selected weight is available."
+}

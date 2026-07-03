@@ -1,0 +1,48 @@
+{
+  "output_dir": "/root/autodl-tmp/gw-catalog/results/gwtc_download_links_20260702",
+  "total_rows": 657,
+  "counts": [
+    {
+      "dataset": "GWTC-3/O1-O3",
+      "data_type": "skymap_or_pe",
+      "download_status": "",
+      "count": 168
+    },
+    {
+      "dataset": "GWTC-3/O1-O3",
+      "data_type": "strain_hdf5_4khz",
+      "download_status": "already_exists",
+      "count": 118
+    },
+    {
+      "dataset": "GWTC-3/O1-O3",
+      "data_type": "strain_hdf5_4khz",
+      "download_status": "no_gwosc_url",
+      "count": 8
+    },
+    {
+      "dataset": "GWTC-4.1/O4a",
+      "data_type": "pe_hdf5_with_skymap_if_available",
+      "download_status": "downloaded",
+      "count": 88
+    },
+    {
+      "dataset": "GWTC-4.1/O4a",
+      "data_type": "strain_hdf5_4khz",
+      "download_status": "already_exists",
+      "count": 34
+    },
+    {
+      "dataset": "GWTC-4.1/O4a",
+      "data_type": "strain_hdf5_4khz",
+      "download_status": "downloaded",
+      "count": 241
+    }
+  ],
+  "source_manifests": [
+    "runs/real_gwtc_lensing_search_20260625/data/strain_gwosc_download_manifest.csv",
+    "runs/real_gwtc_lensing_search_20260625/data/skymap_manifest.csv",
+    "runs/gwtc4p1_data_completion_20260628/data/strain_manifest_gwtc4p1.csv",
+    "runs/gwtc4p1_data_completion_20260628/data/pe_manifest_gwtc4p1.csv"
+  ]
+}

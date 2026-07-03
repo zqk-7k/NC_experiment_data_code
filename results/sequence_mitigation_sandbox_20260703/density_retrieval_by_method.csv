@@ -1,0 +1,37 @@
+experiment,background_density_events_per_yr,seed,method,n_events,n_unlensed_events,n_true_pairs,n_queries,R@1,R@10,R@50,median_rank
+density_scan,100.0,0,time_delay + sky_localization,599,488,52,104,0.7596153846153846,1.0,1.0,1.0
+density_scan,100.0,0,calibrated surrogate waveform_embedding only,599,488,52,104,0.9807692307692307,1.0,1.0,1.0
+density_scan,100.0,0,calibrated surrogate waveform_embedding + time_delay + sky_localization,599,488,52,104,0.9230769230769231,1.0,1.0,1.0
+density_scan,100.0,1,time_delay + sky_localization,564,457,52,104,0.7980769230769231,1.0,1.0,1.0
+density_scan,100.0,1,calibrated surrogate waveform_embedding only,564,457,52,104,1.0,1.0,1.0,1.0
+density_scan,100.0,1,calibrated surrogate waveform_embedding + time_delay + sky_localization,564,457,52,104,0.9519230769230769,1.0,1.0,1.0
+density_scan,100.0,2,time_delay + sky_localization,606,490,57,114,0.6140350877192983,1.0,1.0,1.0
+density_scan,100.0,2,calibrated surrogate waveform_embedding only,606,490,57,114,0.9912280701754386,1.0,1.0,1.0
+density_scan,100.0,2,calibrated surrogate waveform_embedding + time_delay + sky_localization,606,490,57,114,0.9122807017543859,1.0,1.0,1.0
+density_scan,1000.0,0,time_delay + sky_localization,5018,4907,52,104,0.5192307692307693,0.8846153846153846,1.0,1.0
+density_scan,1000.0,0,calibrated surrogate waveform_embedding only,5018,4907,52,104,0.9038461538461539,1.0,1.0,1.0
+density_scan,1000.0,0,calibrated surrogate waveform_embedding + time_delay + sky_localization,5018,4907,52,104,0.6634615384615384,1.0,1.0,1.0
+density_scan,1000.0,1,time_delay + sky_localization,4944,4837,52,104,0.4807692307692308,0.9134615384615384,1.0,2.0
+density_scan,1000.0,1,calibrated surrogate waveform_embedding only,4944,4837,52,104,0.8846153846153846,1.0,1.0,1.0
+density_scan,1000.0,1,calibrated surrogate waveform_embedding + time_delay + sky_localization,4944,4837,52,104,0.6730769230769231,1.0,1.0,1.0
+density_scan,1000.0,2,time_delay + sky_localization,5032,4916,57,114,0.3157894736842105,0.7807017543859649,0.9824561403508771,3.0
+density_scan,1000.0,2,calibrated surrogate waveform_embedding only,5032,4916,57,114,0.9385964912280702,1.0,1.0,1.0
+density_scan,1000.0,2,calibrated surrogate waveform_embedding + time_delay + sky_localization,5032,4916,57,114,0.5789473684210527,0.9649122807017544,1.0,1.0
+density_scan,10000.0,0,time_delay + sky_localization,49127,49016,52,104,0.38461538461538464,0.5192307692307693,0.75,6.0
+density_scan,10000.0,0,calibrated surrogate waveform_embedding only,49127,49016,52,104,0.5480769230769231,0.9615384615384616,1.0,1.0
+density_scan,10000.0,0,calibrated surrogate waveform_embedding + time_delay + sky_localization,49127,49016,52,104,0.5673076923076923,0.7019230769230769,0.9807692307692307,1.0
+density_scan,10000.0,1,time_delay + sky_localization,48952,48845,52,104,0.3942307692307692,0.5,0.7788461538461539,10.0
+density_scan,10000.0,1,calibrated surrogate waveform_embedding only,48952,48845,52,104,0.6153846153846154,0.9615384615384616,1.0,1.0
+density_scan,10000.0,1,calibrated surrogate waveform_embedding + time_delay + sky_localization,48952,48845,52,104,0.5192307692307693,0.7980769230769231,1.0,1.0
+density_scan,10000.0,2,time_delay + sky_localization,49161,49045,57,114,0.23684210526315788,0.34210526315789475,0.6666666666666666,40.0
+density_scan,10000.0,2,calibrated surrogate waveform_embedding only,49161,49045,57,114,0.6228070175438597,0.9736842105263158,1.0,1.0
+density_scan,10000.0,2,calibrated surrogate waveform_embedding + time_delay + sky_localization,49161,49045,57,114,0.37719298245614036,0.6578947368421053,0.9473684210526315,6.0
+density_scan,100000.0,0,time_delay + sky_localization,489752,489641,52,104,0.25961538461538464,0.4519230769230769,0.5096153846153846,36.5
+density_scan,100000.0,0,calibrated surrogate waveform_embedding only,489752,489641,52,104,0.22115384615384615,0.5961538461538461,0.9230769230769231,7.0
+density_scan,100000.0,0,calibrated surrogate waveform_embedding + time_delay + sky_localization,489752,489641,52,104,0.5384615384615384,0.5384615384615384,0.6346153846153846,1.0
+density_scan,100000.0,1,time_delay + sky_localization,489775,489668,52,104,0.25961538461538464,0.47115384615384615,0.5,93.5
+density_scan,100000.0,1,calibrated surrogate waveform_embedding only,489775,489668,52,104,0.38461538461538464,0.6730769230769231,0.9326923076923077,3.0
+density_scan,100000.0,1,calibrated surrogate waveform_embedding + time_delay + sky_localization,489775,489668,52,104,0.5192307692307693,0.5192307692307693,0.6057692307692307,1.0
+density_scan,100000.0,2,time_delay + sky_localization,488894,488778,57,114,0.17543859649122806,0.2719298245614035,0.3157894736842105,361.0
+density_scan,100000.0,2,calibrated surrogate waveform_embedding only,488894,488778,57,114,0.41228070175438597,0.7192982456140351,0.9473684210526315,2.0
+density_scan,100000.0,2,calibrated surrogate waveform_embedding + time_delay + sky_localization,488894,488778,57,114,0.3508771929824561,0.3684210526315789,0.5175438596491229,46.5

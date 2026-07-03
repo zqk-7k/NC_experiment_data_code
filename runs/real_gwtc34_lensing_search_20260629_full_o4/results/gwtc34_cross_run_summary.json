@@ -1,0 +1,33 @@
+{
+  "generated_at_utc": "2026-06-29T17:50:19.104319+00:00",
+  "rows": [
+    {
+      "catalog": "GWTC-3",
+      "n_events": 63,
+      "n_pairs": 1953,
+      "waveform_available_events": 55,
+      "waveform_available_pairs": 1485,
+      "gate1_macro_r_at_10": 0.913888888888889,
+      "gate1_min_family_r_at_10": 0.9111111111111112,
+      "selected_weights": "{\"waveform\": 0.25, \"time\": 0.25, \"sky\": 4.0}",
+      "top_pair": "GW191219_163120--GW191230_180458",
+      "top_pair_waveform_available": true,
+      "top_pair_ood": false,
+      "gw170104_gw170814_rank": 272
+    },
+    {
+      "catalog": "GWTC-4.1",
+      "n_events": 84,
+      "n_pairs": 3486,
+      "waveform_available_events": 81,
+      "waveform_available_pairs": 3240,
+      "gate1_macro_r_at_10": 0.8583333333333334,
+      "gate1_min_family_r_at_10": 0.8444444444444444,
+      "selected_weights": "{\"waveform\": 1.0, \"time\": 0.25, \"sky\": 4.0}",
+      "top_pair": "GW230726_002940--GW230814_230901",
+      "top_pair_waveform_available": true,
+      "top_pair_ood": false,
+      "gw170104_gw170814_rank": ""
+    }
+  ]
+}

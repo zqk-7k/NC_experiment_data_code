@@ -1,0 +1,15 @@
+dataset,top_k,snr_group,candidate_count_in_top_k,fraction_of_top_k
+real_gwtc3_null_catalog,1,high_snr_ge8,1,1.0
+real_gwtc3_null_catalog,5,high_snr_ge8,5,1.0
+real_gwtc3_null_catalog,10,high_snr_ge8,10,1.0
+real_gwtc3_null_catalog,20,high_snr_ge8,20,1.0
+real_gwtc3_null_catalog,50,high_snr_ge8,50,1.0
+real_gwtc3_null_catalog,100,high_snr_ge8,100,1.0
+real_gwtc3_null_catalog,200,high_snr_ge8,200,1.0
+real_gwtc4p1_null_catalog,1,high_snr_ge8,1,1.0
+real_gwtc4p1_null_catalog,5,high_snr_ge8,5,1.0
+real_gwtc4p1_null_catalog,10,high_snr_ge8,10,1.0
+real_gwtc4p1_null_catalog,20,high_snr_ge8,20,1.0
+real_gwtc4p1_null_catalog,50,high_snr_ge8,50,1.0
+real_gwtc4p1_null_catalog,100,high_snr_ge8,100,1.0
+real_gwtc4p1_null_catalog,200,high_snr_ge8,200,1.0
